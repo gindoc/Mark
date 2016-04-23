@@ -21,7 +21,10 @@ public class IndexPresenter {
         this.indexView = indexView;
     }
 
-    public void init(){
+    /**
+     * 初始化分类板块
+     */
+    public void setCategoryView(){
         indexView.setCategoriesView(indexModel.getCategories());
     }
 

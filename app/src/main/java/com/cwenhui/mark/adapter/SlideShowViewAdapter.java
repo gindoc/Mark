@@ -6,15 +6,11 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.cwenhui.mark.R;
+import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.utils.ImageFirstDisplayListener;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.cwenhui.mark.utils.ImageLoaderHelper;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
-import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 
 import java.util.List;
 
@@ -33,7 +29,7 @@ public class SlideShowViewAdapter extends PagerAdapter {
     public SlideShowViewAdapter(Context context, List<ImageView> imageViewsList) {
         this.imageViewsList = imageViewsList;
         this.context = context;
-        initImageLoader(context);
+        options = ImageLoaderHelper.getInstance().initImageLoader(context, imageLoader, Constant.IMAGE_PATH);
     }
 
     @Override
@@ -62,31 +58,4 @@ public class SlideShowViewAdapter extends PagerAdapter {
         return arg0 == arg1;
     }
 
-    /**
-     * ImageLoader 图片组件初始化
-     *
-     * @param context
-     */
-    public void initImageLoader(Context context) {
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
-                .threadPriority(Thread.NORM_PRIORITY - 2)
-                .denyCacheImageMultipleSizesInMemory()
-                .discCacheFileNameGenerator(new Md5FileNameGenerator())
-                .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .writeDebugLogs() // Remove for release app
-                .build();
-
-        options = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.drawable.mianshi) 		    // 设置图片在下载期间显示的图片
-                .showImageForEmptyUri(R.drawable.mianshi) 	        // 设置图片Uri为空或是错误的时候显示的图片
-                .showImageOnFail(R.drawable.mianshi) 		        // 设置图片加载/解码过程中错误时候显示的图片
-                .cacheInMemory(true) 								// 设置下载的图片是否缓存在内存中
-                .cacheOnDisc(true) 									// 设置下载的图片是否缓存在SD卡中
-                .considerExifParams(true) 							// 是否考虑JPEG图像EXIF参数（旋转，翻转）
-                .displayer(new RoundedBitmapDisplayer(20))			// 是否设置为圆角，弧度为多少
-                .displayer(new SimpleBitmapDisplayer())				// 是否图片加载好后渐入的动画时间,
-                                    //此时不要使用FadeInBitmapDisplayer(100),否则更新listview时会出现闪烁的问题
-                .build();
-        imageLoader.init(config);
-    }
 }

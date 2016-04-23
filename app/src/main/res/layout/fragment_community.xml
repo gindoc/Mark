@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activityBackground"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_fragment_community"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/toolBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_community_disguss"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/icon_menu_discuss"
+            android:text=" 讨论区"
+            android:textSize="18sp" />
+
+        <com.cwenhui.mark.utils.RoundImageView
+            android:id="@+id/iv_fragment_community_disguss_member"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/iv_fragment_community_disguss_new_msg"
+            android:scaleType="centerCrop"
+            android:src="@drawable/nowcoder_ic_launcher" />
+
+        <ImageView
+            android:id="@+id/iv_fragment_community_disguss_new_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_fragment_community_disguss_member"
+            android:layout_toLeftOf="@+id/iv_fragment_community_disguss_right"
+            android:src="@drawable/new_message" />
+
+        <ImageView
+            android:id="@+id/iv_fragment_community_disguss_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/frag_right_arrow" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_fragment_community_ranking"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/icon_menu_ranking"
+            android:text=" 排行榜"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/frag_right_arrow" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_fragment_community_clock_news"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="1dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@drawable/icon_menu_clock_news"
+            android:text=" 打卡动态"
+            android:textSize="18sp" />
+
+        <com.cwenhui.mark.utils.RoundImageView
+            android:id="@+id/iv_fragment_community_clock_news_member"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/iv_fragment_community_clock_news_new_msg"
+            android:scaleType="centerCrop"
+            android:src="@drawable/nowcoder_ic_launcher" />
+
+        <ImageView
+            android:id="@+id/iv_fragment_community_clock_news_new_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/iv_fragment_community_clock_news_member"
+            android:layout_toLeftOf="@+id/iv_fragment_community_clock_news_right"
+            android:src="@drawable/new_message" />
+
+        <ImageView
+            android:id="@+id/iv_fragment_community_clock_news_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/frag_right_arrow" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_fragment_community_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:paddingLeft="15dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="1dp"
+        android:paddingRight="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_menu_recommend"
+            android:text=" 内推"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="即将推出 "
+            android:textSize="18sp"
+            android:drawableRight="@drawable/frag_right_arrow"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
             case R.id.ll_activity_main_bottom_study:
                 presenter.setSelect(this,0);
                 break;
+            case R.id.ll_activity_main_bottom_community:
+                presenter.setSelect(this, 1);
+                break;
         }
     }
 }

@@ -30,19 +30,20 @@ public class IndexFragment extends Fragment implements IIndexView{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_index, container, false);
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-        toolbar.setTitle("马克");
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
 
         initView();
         return view;
     }
 
     private void initView() {
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar_fragment_index);
+        toolbar.setTitle("马克");
+        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+
         presenter = new IndexPresenter(this);
         category = (GridView) view.findViewById(R.id.gv_activity_main_category);
 
-        presenter.init();
+        presenter.setCategoryView();
         presenter.setGridViewHeightBasedOnChildren(category, 3);
     }
 

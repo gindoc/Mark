@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.cwenhui.mark.MainActivity;
 import com.cwenhui.mark.R;
+import com.cwenhui.mark.fragment.CommunityFragment;
 import com.cwenhui.mark.fragment.IndexFragment;
 import com.cwenhui.mark.view.IMainView;
 
@@ -13,15 +14,18 @@ import com.cwenhui.mark.view.IMainView;
  * Created by cwenhui on 2016.02.23
  */
 public class MainPresenter {
-//    private IMainModel mainModel;
     private IMainView mainView;
-    private Fragment IndexFragment;
+    private Fragment indexFragment, communityFragment;
 
     public MainPresenter(IMainView mainView) {
         this.mainView = mainView;
-//        this.mainModel = new MainModel();
     }
 
+    /**
+     * 切换fragment
+     * @param activity
+     * @param index 被点击的下标
+     */
     public void setSelect(MainActivity activity, int index) {
         FragmentManager fm = activity.getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -31,28 +35,29 @@ public class MainPresenter {
         switch (index)
         {
             case 0:
-                if (IndexFragment == null)
+                if (indexFragment == null)
                 {
-                    IndexFragment = new IndexFragment();
-                    transaction.add(R.id.fl_activity_main_container, IndexFragment);
+                    indexFragment = new IndexFragment();
+                    transaction.add(R.id.fl_activity_main_container, indexFragment);
                 } else
                 {
-                    transaction.show(IndexFragment);
+                    transaction.show(indexFragment);
                 }
                 mainView.setStudyImage(R.drawable.icon_main_study_selected);
                 break;
-            /*case 1:
-                if (mTab02 == null)
+            case 1:
+                if (communityFragment == null)
                 {
-                    mTab02 = new FrdFragment();transaction.add(R.id.id_content, mTab02);
+                    communityFragment = new CommunityFragment();
+                    transaction.add(R.id.fl_activity_main_container, communityFragment);
                 } else
                 {
-                    transaction.show(mTab02);
+                    transaction.show(communityFragment);
 
                 }
-                mImgFrd.setImageResource(R.drawable.tab_find_frd_pressed);
+                mainView.setCommunityImage(R.drawable.icon_main_community_selected);
                 break;
-            case 2:
+            /*case 2:
                 if (mTab03 == null)
                 {
                     mTab03 = new AddressFragment();
@@ -84,9 +89,12 @@ public class MainPresenter {
 
     private void hideFragment(FragmentTransaction transaction)
     {
-        if (IndexFragment != null)
+        if (indexFragment != null)
         {
-            transaction.hide(IndexFragment);
+            transaction.hide(indexFragment);
+        }
+        if (communityFragment != null) {
+            transaction.hide(communityFragment);
         }
     }
 

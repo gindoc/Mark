@@ -26,7 +26,7 @@ public class LoginActivity extends AppCompatActivity implements IUserLoginView, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_fragment_index);
         setSupportActionBar(toolbar);
 
         initView();

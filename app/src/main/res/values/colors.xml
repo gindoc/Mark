@@ -9,4 +9,5 @@
     <color name="fontColorInMainActivity2">#747474</color>
     <color name="activityBackground">#ECECEC</color>
     <color name="transparent">#ffffff</color>
+    <color name="toolBar">#3D444D</color>
 </resources>
