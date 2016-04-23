@@ -37,7 +37,7 @@ public class IndexFragment extends Fragment implements IIndexView{
 
     private void initView() {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar_fragment_index);
-        toolbar.setTitle("马克");
+        toolbar.setTitle("马课");
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
 
         presenter = new IndexPresenter(this);

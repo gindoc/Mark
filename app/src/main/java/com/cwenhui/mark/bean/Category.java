@@ -1,6 +1,7 @@
 package com.cwenhui.mark.bean;
 
 /**
+ * IndexFragment中的分类板块的每个item对应的bean类
  * Created by cwenhui on 2016.02.23
  */
 public class Category {

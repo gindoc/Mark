@@ -8,6 +8,7 @@ import com.cwenhui.mark.MainActivity;
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.fragment.CommunityFragment;
 import com.cwenhui.mark.fragment.IndexFragment;
+import com.cwenhui.mark.fragment.MessageFragment;
 import com.cwenhui.mark.view.IMainView;
 
 /**
@@ -15,7 +16,7 @@ import com.cwenhui.mark.view.IMainView;
  */
 public class MainPresenter {
     private IMainView mainView;
-    private Fragment indexFragment, communityFragment;
+    private Fragment indexFragment, communityFragment, messageFragment;
 
     public MainPresenter(IMainView mainView) {
         this.mainView = mainView;
@@ -57,18 +58,18 @@ public class MainPresenter {
                 }
                 mainView.setCommunityImage(R.drawable.icon_main_community_selected);
                 break;
-            /*case 2:
-                if (mTab03 == null)
+            case 2:
+                if (messageFragment == null)
                 {
-                    mTab03 = new AddressFragment();
-                    transaction.add(R.id.id_content, mTab03);
+                    messageFragment = new MessageFragment();
+                    transaction.add(R.id.fl_activity_main_container, messageFragment);
                 } else
                 {
-                    transaction.show(mTab03);
+                    transaction.show(messageFragment);
                 }
-                mImgAddress.setImageResource(R.drawable.tab_address_pressed);
+                mainView.setMessageImage(R.drawable.icon_main_message_selected);
                 break;
-            case 3:
+            /*case 3:
                 if (mTab04 == null)
                 {
                     mTab04 = new SettingFragment();
@@ -95,6 +96,9 @@ public class MainPresenter {
         }
         if (communityFragment != null) {
             transaction.hide(communityFragment);
+        }
+        if (messageFragment != null) {
+            transaction.hide(messageFragment);
         }
     }
 

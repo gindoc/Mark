@@ -43,8 +43,7 @@ public class SlideShowViewAdapter extends PagerAdapter {
 
         imageLoader.displayImage(imageView.getTag() + "", imageView,options,displayListener);
 
-
-        ((ViewPager)container).addView(imageViewsList.get(position));
+        ((ViewPager)container).addView(imageView);
         return imageViewsList.get(position);
     }
 
