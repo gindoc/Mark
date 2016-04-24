@@ -12,33 +12,33 @@ import android.widget.ImageView;
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.adapter.RecyclerViewAdapter;
 import com.cwenhui.mark.bean.MessageType;
-import com.cwenhui.mark.presenter.FriendMsgPresenter;
-import com.cwenhui.mark.view.IFriendMsgView;
+import com.cwenhui.mark.presenter.SystemMsgPresenter;
+import com.cwenhui.mark.view.ISystemMsgView;
 
 import java.util.List;
 
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class FriendMsgFragment extends Fragment implements IFriendMsgView {
-    private static final String TAG = "FriendMsgFragment";
+public class SystemMsgFragment extends Fragment implements ISystemMsgView{
+    private static final String TAG = "SystemMsgFragment";
     private View view;
-    private FriendMsgPresenter presenter;
+    private SystemMsgPresenter presenter;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private ImageView emptyView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_friend_msg, container, false);
+        view = inflater.inflate(R.layout.fragment_system_msg, container, false);
         initView();
         return view;
     }
 
     private void initView() {
-        presenter = new FriendMsgPresenter(this);
-        recyclerView = (RecyclerView) view.findViewById(R.id.rv_fragment_friend_msg_empty);
-        emptyView = (ImageView) view.findViewById(R.id.iv_fragment_friend_msg_empty);
+        presenter = new SystemMsgPresenter(this);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rv_fragment_system_msg_empty);
+        emptyView = (ImageView) view.findViewById(R.id.iv_fragment_system_msg_empty);
         presenter.initMessageList();
     }
 
@@ -57,5 +57,4 @@ public class FriendMsgFragment extends Fragment implements IFriendMsgView {
         recyclerView.setAdapter(adapter);
         adapter.checkAdapterIsEmpty(emptyView);
     }
-
 }

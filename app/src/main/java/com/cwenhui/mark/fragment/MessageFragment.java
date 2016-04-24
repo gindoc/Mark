@@ -55,7 +55,7 @@ public class MessageFragment extends Fragment implements IMessageView, ViewPager
     private void setupViewPager() {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new FriendMsgFragment());
-        fragments.add(new FriendMsgFragment());
+        fragments.add(new SystemMsgFragment());
         adapter = new MessagePagerAdapter(context, getChildFragmentManager(), fragments/*, titles*/);
         mViewPager.setAdapter(adapter);
         mViewPager.setOnPageChangeListener(this);

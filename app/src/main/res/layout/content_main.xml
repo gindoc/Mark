@@ -73,7 +73,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="今日刷题/道"
-                    android:textColor="@color/fontColorInMainActivity" />
+                    android:textColor="@color/grayFontColor" />
             </LinearLayout>
 
             <LinearLayout
@@ -97,7 +97,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="今日学习/节"
-                    android:textColor="@color/fontColorInMainActivity" />
+                    android:textColor="@color/grayFontColor" />
             </LinearLayout>
 
             <LinearLayout
@@ -121,7 +121,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="共打卡/天"
-                    android:textColor="@color/fontColorInMainActivity" />
+                    android:textColor="@color/grayFontColor" />
             </LinearLayout>
 
         </LinearLayout>
@@ -155,7 +155,7 @@
                 android:layout_margin="15dp"
                 android:background="@drawable/to_study_bg_activity_main"
                 android:text="Git&amp;Github入门基础"
-                android:textColor="@color/fontColorInMainActivity2" />
+                android:textColor="@color/deepGrayFontColor" />
         </LinearLayout>
 
     </LinearLayout>
