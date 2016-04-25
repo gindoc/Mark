@@ -2,6 +2,7 @@ package com.cwenhui.mark;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -9,7 +10,7 @@ import android.widget.LinearLayout;
 import com.cwenhui.mark.presenter.MainPresenter;
 import com.cwenhui.mark.view.IMainView;
 
-public class MainActivity extends AppCompatActivity implements IMainView, View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements IMainView, View.OnClickListener {
     private static final String TAG = "MainActivity";
     private LinearLayout tabStudy, tabCommunity, tabMessage, tabProfile;
     private ImageButton btnStudy, btnCommunity, btnMessage, btnProfile;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.e(TAG, "onCreate");
 
         initView();
         initEvent();
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         btnMessage = (ImageButton) findViewById(R.id.ib_activity_main_bottom_message);
         btnCommunity = (ImageButton) findViewById(R.id.ib_activity_main_bottom_community);
         btnProfile = (ImageButton) findViewById(R.id.ib_activity_main_bottom_profile);
-        presenter.setSelect(this,0);
+        presenter.setSelect(this, 0);
     }
 
     @Override
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
         presenter.resetImgs();
         switch (v.getId()) {
             case R.id.ll_activity_main_bottom_study:
-                presenter.setSelect(this,0);
+                presenter.setSelect(this, 0);
                 break;
             case R.id.ll_activity_main_bottom_community:
                 presenter.setSelect(this, 1);
@@ -83,4 +85,5 @@ public class MainActivity extends AppCompatActivity implements IMainView, View.O
                 break;
         }
     }
+
 }

@@ -22,6 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * Created by cwenhui on 2016.02.23
  */
 public class CommunityFragment extends Fragment implements ICommunityView{
+    private static final String TAG = "CommunityFragment";
     private View view;
     private CommunityPresenter presenter;
     private RoundImageView disguss, clockNews;

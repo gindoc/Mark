@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cwenhui.mark.MainActivity;
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.presenter.ProfilePresenter;
@@ -23,6 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * Created by cwenhui on 2016.02.23
  */
 public class ProfileFragment extends Fragment implements IProfileView{
+    private static final String TAG = "ProfileFragment";
     private View view;
     private ProfilePresenter presenter;
     private RoundImageView selfImage;
@@ -48,7 +48,7 @@ public class ProfileFragment extends Fragment implements IProfileView{
     private void initView() {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar_fragment_profile);
         toolbar.setTitle("马课");
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        toolbar.inflateMenu(R.menu.menu_profile);
 
         selfImage = (RoundImageView) view.findViewById(R.id.iv_fragment_profile_self_img);
         selfName = (TextView) view.findViewById(R.id.tv_fragment_profile_self_name);
@@ -63,4 +63,5 @@ public class ProfileFragment extends Fragment implements IProfileView{
         selfEduInfo.setText(eduInfor);
         imageLoader.displayImage(image, selfImage, options, displayListener);
     }
+
 }

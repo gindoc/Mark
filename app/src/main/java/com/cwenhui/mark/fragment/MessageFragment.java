@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.cwenhui.mark.MainActivity;
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.adapter.MessagePagerAdapter;
 import com.cwenhui.mark.presenter.MessagePresenter;
@@ -24,6 +23,7 @@ import java.util.List;
  * Created by cwenhui on 2016.02.23
  */
 public class MessageFragment extends Fragment implements IMessageView, ViewPager.OnPageChangeListener{
+    private static final String TAG = "MessageFragment";
     private View view;
     private MessagePresenter presenter;
     private Toolbar toolbar;
@@ -47,7 +47,7 @@ public class MessageFragment extends Fragment implements IMessageView, ViewPager
         mTabLayout = (TabLayout) view.findViewById(R.id.tablayout_fragment_message);
 
         toolbar.setTitle("消息");
-        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
+        toolbar.inflateMenu(R.menu.menu_message);
         setupViewPager();
         presenter.showNewMsg();
     }
@@ -102,4 +102,5 @@ public class MessageFragment extends Fragment implements IMessageView, ViewPager
         View view = mTabLayout.getTabAt(position).getCustomView();
         return (ImageView) view.findViewById(R.id.iv_fragment_message_tab_new_msg);
     }
+
 }
