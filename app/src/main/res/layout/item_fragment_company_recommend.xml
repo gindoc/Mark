@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:layout_marginBottom="1dp"
+    android:background="@color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="15dp">
+
+    <com.cwenhui.mark.utils.RoundImageView
+        android:id="@+id/iv_item_fragment_recommend_logo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="15dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/nowcoder_ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_item_fragment_recommend_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_paper_name"
+            android:ellipsize="marquee"
+            android:maxLines="2"
+            android:text=" 京东2016算法工程师笔试题"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_item_fragment_recommend_people_cnt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:drawableLeft="@drawable/icon_paper_people_cnt"
+            android:ellipsize="marquee"
+            android:maxLines="2"
+            android:text=" 已有143人参加"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_item_fragment_recommend_question_cnt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:drawableLeft="@drawable/icon_paper_question_cnt"
+            android:ellipsize="marquee"
+            android:maxLines="2"
+            android:text=" 题目数量:25"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_paper_difficult"
+                android:ellipsize="marquee"
+                android:maxLines="2"
+                android:text=" 难度"
+                android:textSize="16sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar_item_fragment_recommend"
+                style="@style/yellow_rating_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:numStars="5"
+                android:paddingTop="3dp"
+                android:rating="1.5"
+                android:stepSize="0.5" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

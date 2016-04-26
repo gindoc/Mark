@@ -1,5 +1,6 @@
 package com.cwenhui.mark.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.cwenhui.mark.MainActivity;
@@ -16,6 +18,7 @@ import com.cwenhui.mark.R;
 import com.cwenhui.mark.adapter.CommonAdapter;
 import com.cwenhui.mark.bean.Category;
 import com.cwenhui.mark.presenter.IndexPresenter;
+import com.cwenhui.mark.ui.CompanySubjectActivity;
 import com.cwenhui.mark.utils.ViewHolder;
 import com.cwenhui.mark.view.IIndexView;
 
@@ -24,7 +27,7 @@ import java.util.List;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class IndexFragment extends Fragment implements IIndexView{
+public class IndexFragment extends Fragment implements IIndexView, AdapterView.OnItemClickListener{
     final String TAG = "IndexFragment";
     private View view;
     private GridView category;
@@ -43,7 +46,12 @@ public class IndexFragment extends Fragment implements IIndexView{
         Log.e(TAG, "onCreateView");
 
         initView();
+        initEvent();
         return view;
+    }
+
+    private void initEvent() {
+        category.setOnItemClickListener(this);
     }
 
     private void initView() {
@@ -74,5 +82,12 @@ public class IndexFragment extends Fragment implements IIndexView{
         Log.e(TAG, "onCreateOptionsMenu");
         inflater.inflate(R.menu.menu_index, menu);
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.e(TAG, position + "");
+        Intent intent = new Intent(getActivity(), CompanySubjectActivity.class);
+        startActivity(intent);
     }
 }

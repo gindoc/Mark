@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.cwenhui.mark.R;
-import com.cwenhui.mark.adapter.RecyclerViewAdapter;
+import com.cwenhui.mark.adapter.MessageRecyclerViewAdapter;
 import com.cwenhui.mark.bean.MessageType;
 import com.cwenhui.mark.presenter.SystemMsgPresenter;
 import com.cwenhui.mark.view.ISystemMsgView;
@@ -25,7 +25,7 @@ public class SystemMsgFragment extends Fragment implements ISystemMsgView{
     private View view;
     private SystemMsgPresenter presenter;
     private RecyclerView recyclerView;
-    private RecyclerViewAdapter adapter;
+    private MessageRecyclerViewAdapter adapter;
     private ImageView emptyView;
 
     @Override
@@ -44,7 +44,7 @@ public class SystemMsgFragment extends Fragment implements ISystemMsgView{
 
     @Override
     public void initMessageList(List<MessageType> messageTypes) {
-        adapter = new RecyclerViewAdapter(getActivity(), messageTypes);
+        adapter = new MessageRecyclerViewAdapter(getActivity(), messageTypes);
         adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onChanged() {

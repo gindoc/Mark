@@ -45,7 +45,7 @@ public class MessagePagerAdapter extends FragmentPagerAdapter {
      * 给tab添加自定义View
      */
     public View addCustomViewToTab(int position) {
-        View view = LayoutInflater.from(context).inflate(R.layout.layout_fragment_message_tab_title_, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.layout_fragment_message_tab_title, null);
         TextView tv = (TextView) view.findViewById(R.id.tv_fragment_message_tab_title);
         tv.setTextColor(Color.parseColor("#000000"));
         tv.setText(titles[position]);

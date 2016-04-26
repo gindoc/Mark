@@ -17,8 +17,8 @@ import java.util.List;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
-    private static final String TAG = "RecyclerViewAdapter";
+public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    private static final String TAG = "MessageRecyclerViewAdapter";
     private LayoutInflater mInflater;
     private Context context;
     protected List<MessageType> mDatas;
@@ -35,7 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolder> {
         this.clickListener = clickListener;
     }
 
-    public RecyclerViewAdapter(Context context, List<MessageType> datas) {
+    public MessageRecyclerViewAdapter(Context context, List<MessageType> datas) {
         this.context = context;
         mDatas = datas;
         mInflater = LayoutInflater.from(context);
