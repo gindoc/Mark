@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.cwenhui.mark.R;
 import com.cwenhui.mark.utils.CommondRecyclerViewHolder;
 
 import java.util.List;
@@ -13,14 +14,16 @@ import java.util.List;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<CommondRecyclerViewHolder> {
+public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    private static final int TYPE_ITEM = 0;
+    private static final int TYPE_FOOTER = 1;
     private Context context;
     private int layoutId;
     protected List<T> mDatas;
     private LayoutInflater mInflater;
     private onItemClickListener clickListener;
 
-    public CommonRecyclerViewAdapter(Context context, int layoutId, List<T> datas) {
+    public CommonRefreshRecyclerViewAdapter(Context context, int layoutId, List<T> datas) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
         this.layoutId = layoutId;
@@ -28,32 +31,52 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
     }
 
     @Override
-    public CommondRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(layoutId, parent, false);
-        return new CommondRecyclerViewHolder(view);
-    }
-
-    @Override
-    public int getItemCount() {
-        if (mDatas != null) {
-            return mDatas.size();
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == TYPE_ITEM) {
+            View view = mInflater.inflate(layoutId, parent, false);
+            return new CommondRecyclerViewHolder(view);
         }
-        return 0;
+        // type == TYPE_FOOTER 返回footerView
+        else if (viewType == TYPE_FOOTER) {
+            View view = mInflater.inflate(R.layout.layout_footer_view, parent, false);
+            return new FooterViewHolder(view);
+        }
+        return null;
     }
 
     @Override
-    public void onBindViewHolder(CommondRecyclerViewHolder holder, int position) {
-        T t = mDatas.get(position);
-        convert(holder, t);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof CommondRecyclerViewHolder) {
+            T t = mDatas.get(position);
+            convert(holder, t);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        // 最后一个item设置为footerView
+        if (position + 1 == getItemCount()) {
+            return TYPE_FOOTER;
+        } else {
+            return TYPE_ITEM;
+        }
     }
 
     /**
      * 对item的各个控件进行操作（包括监听setUpItemEvent）
-     *
      * @param holder
      * @param t
      */
-    public abstract void convert(CommondRecyclerViewHolder holder, T t);
+    protected abstract void convert(RecyclerView.ViewHolder holder, T t);
+
+    @Override
+    public int getItemCount() {
+        return mDatas.size()+1;
+    }
+
+    public List<T> getmDatas() {
+        return mDatas;
+    }
 
     public interface onItemClickListener {
         void onItemClick(View view, int pos);
@@ -87,28 +110,9 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
     }
 }
 
-//class CommondRecyclerViewHolder extends RecyclerView.ViewHolder {
-//    private View mConvertView;
-//    private SparseArray<View> mViews;
-//
-//    public CommondRecyclerViewHolder(View viewGroup) {
-//        super(viewGroup);
-//        mConvertView = viewGroup;
-//    }
-//
-//    public CommondRecyclerViewHolder setText(int viewId, String text) {
-//        TextView tv = getView(viewId);
-//        tv.setText(text);
-//        return this;
-//    }
-//
-//    private <T extends View> T getView(int viewId) {
-//        View view = mViews.get(viewId);
-//        if (view == null) {
-//            view = mConvertView.findViewById(viewId);
-//            mViews.put(viewId, view);
-//        }
-//        return (T) view;
-//
-//    }
-//}
+class FooterViewHolder extends RecyclerView.ViewHolder{
+
+    public FooterViewHolder(View itemView) {
+        super(itemView);
+    }
+}

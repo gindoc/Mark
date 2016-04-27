@@ -13,4 +13,12 @@ public interface ICompanyAllView {
      * @param companyAll
      */
     public void initCompanyAllsList(List<CompanyAll> companyAll);
+
+    public void refleshCompanyAllsList(List<CompanyAll> companyAll);
+
+    /**
+     * 隐藏swipeLayout加载框
+     */
+    public void hideLoading();
+
 }

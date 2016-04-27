@@ -14,4 +14,8 @@
     <color name="transparent">#00000000</color>
     <color name="toolBar">#3D444D</color>
     <color name="divider">#676B72</color>
+    <color name="swipeColor1">#dc1263</color>
+    <color name="swipeColor2">#eacf02</color>
+    <color name="swipeColor3">#1215dc</color>
+    <color name="swipeColor4">#12dc4f</color>
 </resources>
