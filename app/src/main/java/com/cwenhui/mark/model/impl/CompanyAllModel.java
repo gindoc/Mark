@@ -15,31 +15,6 @@ import java.util.List;
 public class CompanyAllModel implements ICompanyAllModel {
 
     private static final String TAG = "CompanyAllModel";
-//    private List<CompanyAll> companyAlls;
-
-//    @Override
-//    public void getAllCompanySubjects(String api, final OnGetListener getListener) {
-//        new Thread(new Runnable() {     //模拟网络耗时请求
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(5000);
-//                    Log.e(TAG, "SLEEP");
-//                    companyAlls = new ArrayList<CompanyAll>();
-//                    CompanyAll companyAll;
-//                    for (int i = 0; i < 15; i++) {
-//                        companyAll = new CompanyAll("百度" + i, i * 13);
-//                        companyAlls.add(companyAll);
-//                    }
-//                    getListener.onSuccess(companyAlls);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }).start();
-//
-//    }
-
 
     @Override
     public void getAllCompanySubjects(String api, final OnGetListener<CompanyAll> getListener) {

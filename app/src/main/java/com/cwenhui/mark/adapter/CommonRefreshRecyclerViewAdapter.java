@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
     private Context context;
@@ -24,10 +24,12 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
     private onItemClickListener clickListener;
 
     public CommonRefreshRecyclerViewAdapter(Context context, int layoutId, List<T> datas) {
-        this.mInflater = LayoutInflater.from(context);
         this.context = context;
         this.layoutId = layoutId;
         this.mDatas = datas;
+        if (context != null) {
+            this.mInflater = LayoutInflater.from(this.context);
+        }
     }
 
     @Override
@@ -64,6 +66,7 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
 
     /**
      * 对item的各个控件进行操作（包括监听setUpItemEvent）
+     *
      * @param holder
      * @param t
      */
@@ -71,7 +74,7 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
 
     @Override
     public int getItemCount() {
-        return mDatas.size()+1;
+        return mDatas.size() + 1;
     }
 
     public List<T> getmDatas() {
@@ -110,7 +113,7 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
     }
 }
 
-class FooterViewHolder extends RecyclerView.ViewHolder{
+class FooterViewHolder extends RecyclerView.ViewHolder {
 
     public FooterViewHolder(View itemView) {
         super(itemView);

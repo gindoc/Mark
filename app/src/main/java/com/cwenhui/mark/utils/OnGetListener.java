@@ -1,6 +1,8 @@
 package com.cwenhui.mark.utils;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 利用钩子方法，可以有选择性的重写方法
@@ -8,12 +10,17 @@ import java.util.Collection;
  */
 public class OnGetListener<T> implements IOnGetListener<T> {
     @Override
-    public void onSuccess(Collection<T> T) {
+    public void onSuccess(Collection<T> t) {
 
     }
 
     @Override
     public void onSuccess(T t) {
+
+    }
+
+    @Override
+    public void onSuccess(Map<String, List<T>> ResultSet) {
 
     }
 

@@ -72,14 +72,14 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                if (adapter == null)  return;   //防止第一次加载时就滑动屏幕造成报空指针异常
                 if (lastVisibleItemPosition + 1 == adapter.getItemCount()) {
 
-//                    swipe.setRefreshing(true);
-//                    boolean isRefreshing = swipe.isRefreshing();
-//                    if (isRefreshing) {
-//                        adapter.notifyItemRemoved(adapter.getItemCount());
-//                        return;
-//                    }
+                    boolean isRefreshing = swipe.isRefreshing();
+                    if (isRefreshing) {         //防止在下拉刷新时又上拉加载
+                        adapter.notifyItemRemoved(adapter.getItemCount());
+                        return;
+                    }
                     if (!isLoading) {
                         isLoading = true;
                         presenter.reflesh(ICompanyAllModel.PULL_UP);

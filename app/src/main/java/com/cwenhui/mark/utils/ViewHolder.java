@@ -78,6 +78,11 @@ public class ViewHolder {
 		iv.setImageResource(resId);
 		return this;
 	}
-	
+
+	public ViewHolder setVisibility(int viewId, int visibility) {
+		View view = getView(viewId);
+		view.setVisibility(visibility);
+		return this;
+	}
 
 }

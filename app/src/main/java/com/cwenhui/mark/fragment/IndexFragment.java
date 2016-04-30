@@ -19,6 +19,7 @@ import com.cwenhui.mark.adapter.CommonAdapter;
 import com.cwenhui.mark.bean.Category;
 import com.cwenhui.mark.presenter.IndexPresenter;
 import com.cwenhui.mark.ui.CompanySubjectActivity;
+import com.cwenhui.mark.ui.SpecialPracticeActivity;
 import com.cwenhui.mark.utils.ViewHolder;
 import com.cwenhui.mark.view.IIndexView;
 
@@ -87,7 +88,18 @@ public class IndexFragment extends Fragment implements IIndexView, AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.e(TAG, position + "");
-        Intent intent = new Intent(getActivity(), CompanySubjectActivity.class);
-        startActivity(intent);
+        Intent intent;
+        switch (position) {
+            case 0:
+                intent = new Intent(getActivity(), SpecialPracticeActivity.class);
+                startActivity(intent);
+                break;
+            case 1:
+                intent = new Intent(getActivity(), CompanySubjectActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
     }
 }

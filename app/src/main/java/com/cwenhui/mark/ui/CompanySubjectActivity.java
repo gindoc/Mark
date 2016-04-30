@@ -65,6 +65,9 @@ public class CompanySubjectActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
             case R.id.company_subject_search:
                 Snackbar.make(mTabLayout, "search", Snackbar.LENGTH_SHORT).show();
                 break;
