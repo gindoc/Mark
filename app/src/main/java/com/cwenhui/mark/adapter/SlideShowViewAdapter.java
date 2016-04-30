@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.cwenhui.mark.configs.Constant;
-import com.cwenhui.mark.utils.ImageFirstDisplayListener;
-import com.cwenhui.mark.utils.ImageLoaderHelper;
+import com.cwenhui.mark.common.ImageFirstDisplayListener;
+import com.cwenhui.mark.common.ImageLoaderHelper;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

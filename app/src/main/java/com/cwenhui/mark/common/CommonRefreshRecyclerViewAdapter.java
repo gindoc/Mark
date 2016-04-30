@@ -1,4 +1,4 @@
-package com.cwenhui.mark.adapter;
+package com.cwenhui.mark.common;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,8 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cwenhui.mark.R;
-import com.cwenhui.mark.utils.CommondRecyclerViewHolder;
-import com.cwenhui.mark.utils.SizeUtil;
 
 import java.util.List;
 
@@ -123,7 +121,7 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
         this.clickListener = clickListener;
     }
 
-    protected void setUpItemEvent(final MyViewHolder holder) {
+    protected void setUpItemEvent(final /*MyViewHolder*/CommondRecyclerViewHolder holder) {
         if (clickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

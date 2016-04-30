@@ -1,4 +1,4 @@
-package com.cwenhui.mark.utils;
+package com.cwenhui.mark.common;
 
 import android.content.Context;
 import android.util.SparseArray;

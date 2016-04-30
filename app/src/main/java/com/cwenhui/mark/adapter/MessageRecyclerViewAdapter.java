@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.bean.MessageType;
-import com.cwenhui.mark.utils.RoundImageView;
+import com.cwenhui.mark.widget.RoundImageView;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.cwenhui.mark.utils;
+package com.cwenhui.mark.common;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;

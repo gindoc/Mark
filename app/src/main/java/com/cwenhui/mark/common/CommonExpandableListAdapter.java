@@ -1,4 +1,4 @@
-package com.cwenhui.mark.adapter;
+package com.cwenhui.mark.common;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 
 import com.cwenhui.mark.bean.Practice;
-import com.cwenhui.mark.utils.ViewHolder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,18 +23,18 @@ public abstract class CommonExpandableListAdapter implements ExpandableListAdapt
     private LayoutInflater mInflater;
     private int parentLayout;
     private int childLayout;
-    private HashMap<String, List<Practice>> pratices;
+    private HashMap<String, List<Practice>> mDatas;
     private List<String> parentTypes;
 
     public CommonExpandableListAdapter(Context context, int parentLayout, int childLayout,
-                                       HashMap<String, List<Practice>> pratices) {
+                                       HashMap<String, List<Practice>> datas) {
         this.mContext = context;
         mInflater = LayoutInflater.from(mContext);
         this.parentLayout = parentLayout;
         this.childLayout = childLayout;
-        this.pratices = pratices;
+        this.mDatas = datas;
         parentTypes = new ArrayList<String>();
-        for (Iterator i = pratices.keySet().iterator(); i.hasNext(); ) {
+        for (Iterator i = datas.keySet().iterator(); i.hasNext(); ) {
             parentTypes.add((String) i.next());
         }
     }
@@ -49,6 +48,10 @@ public abstract class CommonExpandableListAdapter implements ExpandableListAdapt
     public void unregisterDataSetObserver(DataSetObserver observer) {
     }
 
+    public HashMap<String, List<Practice>> getmDatas() {
+        return mDatas;
+    }
+
     @Override
     public int getGroupCount() {
         return parentTypes.size();
@@ -57,7 +60,7 @@ public abstract class CommonExpandableListAdapter implements ExpandableListAdapt
     @Override
     public int getChildrenCount(int groupPosition) {
         String parent = parentTypes.get(groupPosition);
-        return pratices.get(parent).size();
+        return mDatas.get(parent).size();
     }
 
     @Override
@@ -68,7 +71,7 @@ public abstract class CommonExpandableListAdapter implements ExpandableListAdapt
     @Override
     public Object getChild(int groupPosition, int childPosition) {
         String parent = parentTypes.get(groupPosition);
-        return pratices.get(parent).get(childPosition);
+        return mDatas.get(parent).get(childPosition);
     }
 
     @Override

@@ -12,11 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cwenhui.mark.R;
-import com.cwenhui.mark.adapter.CommonRefreshRecyclerViewAdapter;
+import com.cwenhui.mark.common.CommonRefreshRecyclerViewAdapter;
 import com.cwenhui.mark.bean.CompanyAll;
 import com.cwenhui.mark.model.ICompanyAllModel;
 import com.cwenhui.mark.presenter.CompanyAllPresenter;
-import com.cwenhui.mark.utils.CommondRecyclerViewHolder;
+import com.cwenhui.mark.common.CommondRecyclerViewHolder;
 import com.cwenhui.mark.view.ICompanyAllView;
 
 import java.util.List;

@@ -5,7 +5,7 @@ import android.os.Handler;
 import com.cwenhui.mark.bean.CompanyAll;
 import com.cwenhui.mark.model.ICompanyAllModel;
 import com.cwenhui.mark.model.impl.CompanyAllModel;
-import com.cwenhui.mark.utils.OnGetListener;
+import com.cwenhui.mark.common.OnGetListener;
 import com.cwenhui.mark.view.ICompanyAllView;
 
 import java.util.Collection;

@@ -1,10 +1,8 @@
 package com.cwenhui.mark.model.impl;
 
-import android.util.Log;
-
 import com.cwenhui.mark.bean.CompanyAll;
 import com.cwenhui.mark.model.ICompanyAllModel;
-import com.cwenhui.mark.utils.OnGetListener;
+import com.cwenhui.mark.common.OnGetListener;
 
 import java.util.ArrayList;
 import java.util.List;

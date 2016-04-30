@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.cwenhui.mark.R;
-import com.cwenhui.mark.adapter.CommonRecyclerViewAdapter;
+import com.cwenhui.mark.common.CommonRecyclerViewAdapter;
 import com.cwenhui.mark.bean.CompanyRecommend;
 import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.presenter.RecommendPresenter;
-import com.cwenhui.mark.utils.CommondRecyclerViewHolder;
-import com.cwenhui.mark.utils.ImageFirstDisplayListener;
-import com.cwenhui.mark.utils.ImageLoaderHelper;
+import com.cwenhui.mark.common.CommondRecyclerViewHolder;
+import com.cwenhui.mark.common.ImageFirstDisplayListener;
+import com.cwenhui.mark.common.ImageLoaderHelper;
 import com.cwenhui.mark.view.ICompanyRecommendView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;

@@ -1,9 +1,12 @@
 package com.cwenhui.mark.presenter;
 
+import android.os.Handler;
+
 import com.cwenhui.mark.bean.Practice;
+import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.model.ICompanyAllModel;
 import com.cwenhui.mark.model.ISpecialPracticeModel;
 import com.cwenhui.mark.model.impl.SpecialPracticeModel;
-import com.cwenhui.mark.utils.OnGetListener;
 import com.cwenhui.mark.view.ISpecialPracticeView;
 
 import java.util.HashMap;
@@ -16,17 +19,50 @@ import java.util.Map;
 public class SpecialPraticePresenter {
     private ISpecialPracticeView practiceView;
     private ISpecialPracticeModel practiceModel;
+    private Handler mHandler = new Handler();
 
     public SpecialPraticePresenter(ISpecialPracticeView practiceView) {
         this.practiceView = practiceView;
         this.practiceModel = new SpecialPracticeModel();
     }
 
+    /**
+     * 初始化专项练习列表
+     */
     public void initSpecialPracticeList() {
         practiceModel.getPratices(null, new OnGetListener<Practice>() {
             @Override
-            public void onSuccess(Map<String, List<Practice>> ResultSet) {
-                practiceView.initQuestionList((HashMap<String, List<Practice>>) ResultSet);
+            public void onSuccess(final Map<String, List<Practice>> ResultSet) {
+                mHandler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        practiceView.initQuestionList((HashMap<String, List<Practice>>) ResultSet);
+                        practiceView.hideLoading();
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * 刷新专项练习列表
+     * @param direction
+     */
+    public void reflesh(final int direction) {
+        practiceModel.refleshAllSpecialSubjects(null, direction, new OnGetListener<Practice>() {
+            @Override
+            public void onSuccess(final Map<String, List<Practice>> ResultSet) {
+                mHandler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        if (direction == ICompanyAllModel.PULL_DOWN){
+                            practiceView.initQuestionList((HashMap<String, List<Practice>>) ResultSet);
+                        }
+                        practiceView.hideLoading();
+                    }
+                });
             }
         });
     }

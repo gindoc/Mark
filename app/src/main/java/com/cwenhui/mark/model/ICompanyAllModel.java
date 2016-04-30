@@ -1,7 +1,7 @@
 package com.cwenhui.mark.model;
 
 import com.cwenhui.mark.bean.CompanyAll;
-import com.cwenhui.mark.utils.OnGetListener;
+import com.cwenhui.mark.common.OnGetListener;
 
 /**
  * Created by cwenhui on 2016.02.23
@@ -29,7 +29,7 @@ public interface ICompanyAllModel {
      * @param direction
      * @return
      */
-//    public List<CompanyAll> refleshAllCompanySubjects(String api, int direction, OnGetListener getListener);
+//    public List<CompanyAll> refleshAllSpecialSubjects(String api, int direction, OnGetListener getListener);
     public void refleshAllCompanySubjects(String api, int direction,
                                                       OnGetListener<CompanyAll> getListener);
 }

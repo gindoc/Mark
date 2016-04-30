@@ -15,12 +15,12 @@ import android.widget.GridView;
 
 import com.cwenhui.mark.MainActivity;
 import com.cwenhui.mark.R;
-import com.cwenhui.mark.adapter.CommonAdapter;
+import com.cwenhui.mark.common.CommonAdapter;
 import com.cwenhui.mark.bean.Category;
 import com.cwenhui.mark.presenter.IndexPresenter;
 import com.cwenhui.mark.ui.CompanySubjectActivity;
 import com.cwenhui.mark.ui.SpecialPracticeActivity;
-import com.cwenhui.mark.utils.ViewHolder;
+import com.cwenhui.mark.common.ViewHolder;
 import com.cwenhui.mark.view.IIndexView;
 
 import java.util.List;

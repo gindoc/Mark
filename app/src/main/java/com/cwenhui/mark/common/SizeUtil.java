@@ -1,4 +1,4 @@
-package com.cwenhui.mark.utils;
+package com.cwenhui.mark.common;
 
 import android.app.Activity;
 import android.content.Context;

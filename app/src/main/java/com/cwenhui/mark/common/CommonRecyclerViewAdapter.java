@@ -1,12 +1,10 @@
-package com.cwenhui.mark.adapter;
+package com.cwenhui.mark.common;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.cwenhui.mark.utils.CommondRecyclerViewHolder;
 
 import java.util.List;
 
@@ -65,7 +63,7 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
         this.clickListener = clickListener;
     }
 
-    protected void setUpItemEvent(final MyViewHolder holder) {
+    protected void setUpItemEvent(final /*MyViewHolder*/CommondRecyclerViewHolder holder) {
         if (clickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,29 +84,3 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
         }
     }
 }
-
-//class CommondRecyclerViewHolder extends RecyclerView.ViewHolder {
-//    private View mConvertView;
-//    private SparseArray<View> mViews;
-//
-//    public CommondRecyclerViewHolder(View viewGroup) {
-//        super(viewGroup);
-//        mConvertView = viewGroup;
-//    }
-//
-//    public CommondRecyclerViewHolder setText(int viewId, String text) {
-//        TextView tv = getView(viewId);
-//        tv.setText(text);
-//        return this;
-//    }
-//
-//    private <T extends View> T getView(int viewId) {
-//        View view = mViews.get(viewId);
-//        if (view == null) {
-//            view = mConvertView.findViewById(viewId);
-//            mViews.put(viewId, view);
-//        }
-//        return (T) view;
-//
-//    }
-//}

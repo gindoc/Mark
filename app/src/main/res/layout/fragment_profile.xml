@@ -35,7 +35,7 @@
                 android:background="@color/toolBar"
                 android:padding="20dp">
 
-                <com.cwenhui.mark.utils.RoundImageView
+                <com.cwenhui.mark.widget.RoundImageView
                     android:id="@+id/iv_fragment_profile_self_img"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
