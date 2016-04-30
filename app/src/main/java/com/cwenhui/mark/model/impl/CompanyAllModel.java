@@ -23,10 +23,9 @@ public class CompanyAllModel implements ICompanyAllModel {
             public void run() {
                 try {
                     Thread.sleep(5000);
-                    Log.e(TAG, "SLEEP");
                     List<CompanyAll> companyAlls = new ArrayList<CompanyAll>();
                     CompanyAll companyAll;
-                    for (int i = 0; i < 15; i++) {
+                    for (int i = 0; i < 5; i++) {
                         companyAll = new CompanyAll("百度" + i, i * 13);
                         companyAlls.add(companyAll);
                     }
@@ -57,7 +56,6 @@ public class CompanyAllModel implements ICompanyAllModel {
                         companyAlls.add(companyAll);
                     }
                 }else if (direction == PULL_UP) {
-                    Log.e(TAG, "PULL_UP");
                     for (int i = 0; i < 20; i++) {
                         companyAll = new CompanyAll("百度" + i * 5, i * 5 + 6);
                         companyAlls.add(companyAll);

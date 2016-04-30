@@ -1,13 +1,16 @@
 package com.cwenhui.mark.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.utils.CommondRecyclerViewHolder;
+import com.cwenhui.mark.utils.SizeUtil;
 
 import java.util.List;
 
@@ -17,6 +20,7 @@ import java.util.List;
 public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
+    private static final int TYPE_NOT_FULL = -1;
     private Context context;
     private int layoutId;
     protected List<T> mDatas;
@@ -43,6 +47,9 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
             View view = mInflater.inflate(R.layout.layout_footer_view, parent, false);
             return new FooterViewHolder(view);
         }
+        else if (viewType == TYPE_NOT_FULL) {
+            return new FooterViewHolder(new TextView(parent.getContext()));     //借用FooterViewHolder显示空白view
+        }
         return null;
     }
 
@@ -56,8 +63,12 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
 
     @Override
     public int getItemViewType(int position) {
+        //当屏幕没有占满的时候，最后一个item用空白view代替footerView
+        if(!isFullScreen() && position + 1 == getItemCount()){
+            return TYPE_NOT_FULL;
+        }
         // 最后一个item设置为footerView
-        if (position + 1 == getItemCount()) {
+        else if (position + 1 == getItemCount()) {
             return TYPE_FOOTER;
         } else {
             return TYPE_ITEM;
@@ -79,6 +90,27 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
 
     public List<T> getmDatas() {
         return mDatas;
+    }
+
+    /**
+     * 判断加载的item是否填充满屏幕
+     * @return
+     */
+    public boolean isFullScreen() {
+        // 窗口的宽度
+        int screenWidth = SizeUtil.getScreenWidth((Activity) context);
+        // 窗口高度
+        int screenHeight = SizeUtil.getScreenHeight((Activity) context);
+        //获取listview的item的高度
+        View view = mInflater.inflate(layoutId, null);
+        view.measure(0, 0);
+        //得到一屏幕上最多放的数据数量 如有标题请将标题高度减去
+        int count = SizeUtil.px2dip(context, screenHeight) / SizeUtil.px2dip(context, view.getMeasuredHeight());
+        if (count > getItemCount()) {
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public interface onItemClickListener {
@@ -119,3 +151,4 @@ class FooterViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 }
+

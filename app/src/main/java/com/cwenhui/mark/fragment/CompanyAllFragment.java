@@ -80,6 +80,9 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
                         adapter.notifyItemRemoved(adapter.getItemCount());
                         return;
                     }
+                    if (!adapter.isFullScreen()) {      //如果加载的item小于屏幕能装载的个数，则隐藏footerView
+                        return;
+                    }
                     if (!isLoading) {
                         isLoading = true;
                         presenter.reflesh(ICompanyAllModel.PULL_UP);
@@ -92,7 +95,6 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition();
-                Log.e(TAG, lastVisibleItemPosition + "");
             }
         });
     }
