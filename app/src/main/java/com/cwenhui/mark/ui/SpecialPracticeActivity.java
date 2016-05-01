@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by cwenhui on 2016.02.23
  */
 public class SpecialPracticeActivity extends AppCompatActivity implements ISpecialPracticeView,
-        SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
     private static final String TAG = "SpecialPracticeActivity";
     private Toolbar toolbar;
     private ExpandableListView listView;
@@ -62,6 +63,7 @@ public class SpecialPracticeActivity extends AppCompatActivity implements ISpeci
         listView = (ExpandableListView) findViewById(R.id.expandablelv_activity_special_practice);
         listView.setGroupIndicator(null);
         listView.setChildIndicator(null);
+        listView.setOnScrollListener(this);
         presenter.initSpecialPracticeList();
     }
 
@@ -149,5 +151,23 @@ public class SpecialPracticeActivity extends AppCompatActivity implements ISpeci
                 }
             }
         };
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {
+    }
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        boolean enable = false;
+        if(listView != null && listView.getChildCount() > 0){
+            // check if the first item of the list is visible
+            boolean firstItemVisible = listView.getFirstVisiblePosition() == 0;
+            // check if the top of the first item is visible
+            boolean topOfFirstItemVisible = listView.getChildAt(0).getTop() == 0;
+            // enabling or disabling the refresh layout
+            enable = firstItemVisible && topOfFirstItemVisible;
+        }
+        swipe.setEnabled(enable);
     }
 }
