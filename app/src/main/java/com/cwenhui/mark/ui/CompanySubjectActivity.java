@@ -11,7 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cwenhui.mark.R;
-import com.cwenhui.mark.adapter.CompanySubjectPagerAdapter;
+import com.cwenhui.mark.common.CommonPagerAdapter;
 import com.cwenhui.mark.fragment.CompanyAllFragment;
 import com.cwenhui.mark.fragment.CompanyRecommendFragment;
 
@@ -26,7 +26,8 @@ import static com.cwenhui.mark.R.id.toolbar_activity_company_subject;
 public class CompanySubjectActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-    private CompanySubjectPagerAdapter adapter;
+//    private CompanySubjectPagerAdapter adapter;
+    private CommonPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,8 @@ public class CompanySubjectActivity extends AppCompatActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new CompanyRecommendFragment());
         fragments.add(new CompanyAllFragment());
-        adapter = new CompanySubjectPagerAdapter(getSupportFragmentManager(), fragments);
+//        adapter = new CompanySubjectPagerAdapter(getSupportFragmentManager(), fragments);
+        adapter = new CommonPagerAdapter(getSupportFragmentManager(), new String[]{"推荐", "全部"}, fragments);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
@@ -67,6 +69,7 @@ public class CompanySubjectActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
                 break;
             case R.id.company_subject_search:
                 Snackbar.make(mTabLayout, "search", Snackbar.LENGTH_SHORT).show();

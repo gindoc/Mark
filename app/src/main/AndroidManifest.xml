@@ -25,6 +25,11 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.SpecialPracticeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.CourseActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.DisgussActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

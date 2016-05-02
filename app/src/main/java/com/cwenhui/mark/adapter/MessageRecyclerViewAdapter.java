@@ -88,6 +88,10 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MyViewHolde
         }
     }
 
+    /**
+     * 检查是否没有消息，没有则显示提示图片
+     * @param emptyView
+     */
     public void checkAdapterIsEmpty (View emptyView) {
         if (getItemCount() == 0) {
             emptyView.setVisibility(View.VISIBLE);

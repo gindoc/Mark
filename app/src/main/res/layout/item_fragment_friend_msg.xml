@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp">
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:layout_marginBottom="1dp"
+    android:background="@color/white">
 
-    <RelativeLayout
+    <!--<RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="15dp"
-        android:paddingRight="15dp">
+        android:paddingRight="15dp">-->
 
         <com.cwenhui.mark.widget.RoundImageView
             android:id="@+id/iv_item_fragment_friend_msg_img"
@@ -42,7 +44,7 @@
             android:src="@drawable/frag_right_arrow"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"/>
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 
-</android.support.v7.widget.CardView>
+</RelativeLayout>

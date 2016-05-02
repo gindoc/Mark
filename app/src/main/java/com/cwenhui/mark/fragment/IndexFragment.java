@@ -15,12 +15,13 @@ import android.widget.GridView;
 
 import com.cwenhui.mark.MainActivity;
 import com.cwenhui.mark.R;
-import com.cwenhui.mark.common.CommonAdapter;
 import com.cwenhui.mark.bean.Category;
+import com.cwenhui.mark.common.CommonAdapter;
+import com.cwenhui.mark.common.ViewHolder;
 import com.cwenhui.mark.presenter.IndexPresenter;
 import com.cwenhui.mark.ui.CompanySubjectActivity;
+import com.cwenhui.mark.ui.CourseActivity;
 import com.cwenhui.mark.ui.SpecialPracticeActivity;
-import com.cwenhui.mark.common.ViewHolder;
 import com.cwenhui.mark.view.IIndexView;
 
 import java.util.List;
@@ -43,9 +44,6 @@ public class IndexFragment extends Fragment implements IIndexView, AdapterView.O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_index, container, false);
-
-        Log.e(TAG, "onCreateView");
-
         initView();
         initEvent();
         return view;
@@ -97,9 +95,15 @@ public class IndexFragment extends Fragment implements IIndexView, AdapterView.O
             case 1:
                 intent = new Intent(getActivity(), CompanySubjectActivity.class);
                 startActivity(intent);
+//                getActivity().overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
                 break;
+
+            case 3:
+                intent = new Intent(getActivity(), CourseActivity.class);
+                startActivity(intent);
             default:
                 break;
         }
+        getActivity().overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
     }
 }

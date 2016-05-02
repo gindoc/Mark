@@ -11,13 +11,13 @@
         android:id="@+id/company_subject_notice"
         android:icon="@drawable/icon_bell"
         android:orderInCategory="100"
-        android:title="查找"
+        android:title="通知"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/company_subject_filter"
         android:icon="@drawable/icon_filter"
         android:orderInCategory="100"
-        android:title="查找"
+        android:title="过滤"
         app:showAsAction="ifRoom" />
 
 </menu>

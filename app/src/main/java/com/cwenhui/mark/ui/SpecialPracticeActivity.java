@@ -96,6 +96,7 @@ public class SpecialPracticeActivity extends AppCompatActivity implements ISpeci
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
+                overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
                 break;
             case R.id.special_practice_notice:
                 Snackbar.make(toolbar, "no news", Snackbar.LENGTH_SHORT).show();
@@ -137,7 +138,7 @@ public class SpecialPracticeActivity extends AppCompatActivity implements ISpeci
                     .setText(R.id.tv_item_child_question_cnt, "共" + child.getQuesCnt() + "题")
                     .setText(R.id.tv_item_child_doned_cnt, "已练习" + child.getDoneCnt() + "题");
                 if (child.getAccuracy() != 0) {
-                    holder.setText(R.id.tv_item_child_accuracy, "正确率" + child.getAccuracy() + "%")
+                    holder.setText(R.id.tv_item_child_accuracy, "正确率" + String.format("%.2f", child.getAccuracy()) + "%")
                             .setVisibility(R.id.tv_item_child_accuracy, View.VISIBLE)
                             .setVisibility(R.id.view_item_child_should_hide, View.VISIBLE);
                 }else{

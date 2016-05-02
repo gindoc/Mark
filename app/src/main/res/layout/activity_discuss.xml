@@ -12,24 +12,34 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_fragment_message"
+            android:id="@+id/toolbar_activity_discuss"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/toolBar"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最新"
+                android:gravity="center_vertical"
+                android:textColor="@color/white"
+                android:drawableRight="@drawable/ic_arrow_drop_down_white_24dp"
+                android:textSize="20sp"/>
+        </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/tablayout_fragment_message"
+            android:id="@+id/tablayout_activity_discuss"
             style="@style/MyCustomTabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/activityBackground" />
+            android:background="@color/activityBackground"
+            app:tabMode="scrollable" />
 
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_fragment_message"
+        android:id="@+id/viewpager_activity_discuss"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
