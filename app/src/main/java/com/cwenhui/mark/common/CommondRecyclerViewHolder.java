@@ -25,6 +25,11 @@ public class CommondRecyclerViewHolder extends RecyclerView.ViewHolder {
         return this;
     }
 
+    public CommondRecyclerViewHolder setVisibility(int viewId, int visibility) {
+        getView(viewId).setVisibility(visibility);
+        return this;
+    }
+
     public CommondRecyclerViewHolder setRatingBar(int viewId, float rating) {
         RatingBar ratingBar = getView(viewId);
         ratingBar.setRating(rating);

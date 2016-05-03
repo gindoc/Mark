@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/card_margin">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/x15"
+        android:paddingLeft="@dimen/x5"
+        android:paddingRight="@dimen/x5"
+        android:paddingTop="@dimen/x10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.cwenhui.mark.widget.RoundImageView
+                android:id="@+id/iv_item_fragment_discuss_img"
+                android:layout_width="@dimen/x35"
+                android:layout_height="@dimen/x35"
+                android:layout_marginRight="@dimen/x5"
+                android:src="@drawable/nowcoder_ic_launcher" />
+
+            <TextView
+                android:id="@+id/tv_item_fragment_discuss_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="爱吃猫的鱼"
+                android:textColor="@color/themeColor"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_item_fragment_discuss_publish_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x5"
+                android:text="最后回复7天前"
+                android:textColor="@color/grayFontColor" />
+
+            <TextView
+                android:id="@+id/tv_item_fragment_discuss_cat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x5"
+                android:text="[随便聊聊]"
+                android:textColor="@color/grayFontColor" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item_fragment_discuss_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x5"
+                android:background="@drawable/discuss_top_background"
+                android:padding="@dimen/x2"
+                android:text="置顶"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_item_fragment_discuss_topic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x5"
+                android:text="增人玫瑰，手留余香!春招精华面经集合"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_item_fragment_discuss_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x10"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="@string/item_activity_discuss_test" />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

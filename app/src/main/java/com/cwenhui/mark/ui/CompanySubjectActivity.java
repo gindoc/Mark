@@ -26,7 +26,6 @@ import static com.cwenhui.mark.R.id.toolbar_activity_company_subject;
 public class CompanySubjectActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-//    private CompanySubjectPagerAdapter adapter;
     private CommonPagerAdapter adapter;
 
     @Override
@@ -39,10 +38,12 @@ public class CompanySubjectActivity extends AppCompatActivity {
     private void initView() {
         mViewPager = (ViewPager) findViewById(R.id.viewpager_activity_company_subject);
         mTabLayout = (TabLayout) findViewById(R.id.tablayout_activity_company_subject);
+
         Toolbar toolbar = (Toolbar) findViewById(toolbar_activity_company_subject);
         toolbar.setTitle("公司真题套题");
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
+
         setupViewPager();
     }
 
@@ -50,7 +51,6 @@ public class CompanySubjectActivity extends AppCompatActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new CompanyRecommendFragment());
         fragments.add(new CompanyAllFragment());
-//        adapter = new CompanySubjectPagerAdapter(getSupportFragmentManager(), fragments);
         adapter = new CommonPagerAdapter(getSupportFragmentManager(), new String[]{"推荐", "全部"}, fragments);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);

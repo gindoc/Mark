@@ -5,18 +5,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cwenhui.mark.R;
-import com.cwenhui.mark.common.CommonRefreshRecyclerViewAdapter;
 import com.cwenhui.mark.bean.CompanyAll;
-import com.cwenhui.mark.model.ICompanyAllModel;
-import com.cwenhui.mark.presenter.CompanyAllPresenter;
+import com.cwenhui.mark.common.CommonRefreshRecyclerViewAdapter;
 import com.cwenhui.mark.common.CommondRecyclerViewHolder;
+import com.cwenhui.mark.common.RVScrollListener;
+import com.cwenhui.mark.configs.Constant;
+import com.cwenhui.mark.presenter.CompanyAllPresenter;
 import com.cwenhui.mark.view.ICompanyAllView;
 
 import java.util.List;
@@ -33,8 +33,8 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
     private RecyclerView recyclerView;
     private LinearLayoutManager mLayoutManager;
     private CommonRefreshRecyclerViewAdapter<CompanyAll> adapter;
-    private int lastVisibleItemPosition;
-    private boolean isLoading = false;
+//    private int lastVisibleItemPosition;
+//    private boolean isLoading = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,7 +48,6 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
 
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe_fragment_company_all);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_fragment_company_all);
-        setRecyclerViewListener();
 
         swipe.setColorSchemeResources(R.color.swipeColor1, R.color.swipeColor2,
                 R.color.swipeColor3, R.color.swipeColor4);
@@ -68,7 +67,7 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -96,13 +95,14 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
                 super.onScrolled(recyclerView, dx, dy);
                 lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition();
             }
-        });
+        });*/
+        recyclerView.addOnScrollListener(new RVScrollListener(recyclerView, swipe, presenter));
     }
 
     @Override
     public void initCompanyAllsList(List<CompanyAll> companyAll) {
         adapter = new CommonRefreshRecyclerViewAdapter<CompanyAll>(getActivity(),
-                R.layout.item_fragment_company_all, companyAll) {
+                R.layout.item_fragment_company_all, R.layout.layout_footer_company_all, companyAll) {
             @Override
             protected void convert(RecyclerView.ViewHolder holder, CompanyAll companyAll) {
                 ((CommondRecyclerViewHolder) holder).setText(R.id.tv_item_fragment_all_name, companyAll.getCompanyName())
@@ -111,6 +111,7 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
         };
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        setRecyclerViewListener();
     }
 
     @Override
@@ -122,7 +123,7 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
     @Override
     public void hideLoading() {
         swipe.setRefreshing(false);
-        isLoading = false;
+//        isLoading = false;
     }
 
     /**
@@ -130,6 +131,6 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
      */
     @Override
     public void onRefresh() {
-        presenter.reflesh(ICompanyAllModel.PULL_DOWN);
+        presenter.reflesh(Constant.PULL_DOWN);
     }
 }

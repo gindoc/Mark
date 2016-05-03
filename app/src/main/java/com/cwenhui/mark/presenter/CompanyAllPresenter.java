@@ -3,9 +3,11 @@ package com.cwenhui.mark.presenter;
 import android.os.Handler;
 
 import com.cwenhui.mark.bean.CompanyAll;
+import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.RVScrollListener;
+import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.model.ICompanyAllModel;
 import com.cwenhui.mark.model.impl.CompanyAllModel;
-import com.cwenhui.mark.common.OnGetListener;
 import com.cwenhui.mark.view.ICompanyAllView;
 
 import java.util.Collection;
@@ -14,7 +16,7 @@ import java.util.List;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class CompanyAllPresenter {
+public class CompanyAllPresenter implements IPresenter{
     private static final String TAG = "CompanyAllPresenter";
     private ICompanyAllView companyAllView;
     private ICompanyAllModel companyAllModel;
@@ -29,7 +31,6 @@ public class CompanyAllPresenter {
      * 初始化全部公司套题列表
      */
     public void initCompanyAllsList() {
-//        companyAllView.showLoading();
         companyAllModel.getAllCompanySubjects(null, new OnGetListener<CompanyAll>() {
             @Override
             public void onSuccess(final Collection<CompanyAll> companyAlls) {
@@ -57,13 +58,15 @@ public class CompanyAllPresenter {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        if (direction == ICompanyAllModel.PULL_DOWN){
+                        if (direction == Constant.PULL_DOWN) {
                             companyAllView.initCompanyAllsList((List<CompanyAll>) companyAlls);
-                        }
-                        else{
+                        } else {
                             companyAllView.refleshCompanyAllsList((List<CompanyAll>) companyAlls);
                         }
                         companyAllView.hideLoading();
+                        synchronized ((Object) RVScrollListener.isLoading) {
+                            RVScrollListener.isLoading = false;
+                        }
                     }
                 });
             }

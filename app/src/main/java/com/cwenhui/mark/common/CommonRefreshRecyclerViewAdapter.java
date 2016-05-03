@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.cwenhui.mark.R;
-
 import java.util.List;
 
 /**
@@ -20,14 +18,16 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
     private static final int TYPE_FOOTER = 1;
     private static final int TYPE_NOT_FULL = -1;
     private Context context;
-    private int layoutId;
+    private int itemLayout;
+    private int footerLayout;
     protected List<T> mDatas;
     private LayoutInflater mInflater;
     private onItemClickListener clickListener;
 
-    public CommonRefreshRecyclerViewAdapter(Context context, int layoutId, List<T> datas) {
+    public CommonRefreshRecyclerViewAdapter(Context context, int itemLayout, int footerLayout, List<T> datas) {
         this.context = context;
-        this.layoutId = layoutId;
+        this.itemLayout = itemLayout;
+        this.footerLayout = footerLayout;
         this.mDatas = datas;
         if (context != null) {
             this.mInflater = LayoutInflater.from(this.context);
@@ -37,12 +37,12 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == TYPE_ITEM) {
-            View view = mInflater.inflate(layoutId, parent, false);
+            View view = mInflater.inflate(itemLayout, parent, false);
             return new CommondRecyclerViewHolder(view);
         }
         // type == TYPE_FOOTER 返回footerView
         else if (viewType == TYPE_FOOTER) {
-            View view = mInflater.inflate(R.layout.layout_footer_view, parent, false);
+            View view = mInflater.inflate(footerLayout, parent, false);
             return new FooterViewHolder(view);
         }
         else if (viewType == TYPE_NOT_FULL) {
@@ -100,7 +100,7 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
         // 窗口高度
         int screenHeight = SizeUtil.getScreenHeight((Activity) context);
         //获取listview的item的高度
-        View view = mInflater.inflate(layoutId, null);
+        View view = mInflater.inflate(itemLayout, null);
         view.measure(0, 0);
         //得到一屏幕上最多放的数据数量 如有标题请将标题高度减去
         int count = SizeUtil.px2dip(context, screenHeight) / SizeUtil.px2dip(context, view.getMeasuredHeight());
