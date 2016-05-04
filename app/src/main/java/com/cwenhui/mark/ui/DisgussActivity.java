@@ -14,6 +14,7 @@ import com.cwenhui.mark.common.CommonPagerAdapter;
 import com.cwenhui.mark.fragment.CompanyAllFragment;
 import com.cwenhui.mark.fragment.CompanyRecommendFragment;
 import com.cwenhui.mark.fragment.DiscussAllFragment;
+import com.cwenhui.mark.fragment.DiscussFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +48,7 @@ public class DisgussActivity extends AppCompatActivity {
     private void setupViewPager() {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new DiscussAllFragment());
-        fragments.add(new CompanyAllFragment());
+        fragments.add(new DiscussFragment());
         fragments.add(new CompanyRecommendFragment());
         fragments.add(new CompanyAllFragment());
         fragments.add(new CompanyRecommendFragment());

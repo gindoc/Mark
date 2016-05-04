@@ -13,4 +13,10 @@ public interface IDiscussModel {
      * @param getListener
      */
     public void initDisgussList(String api, OnGetListener<Discuss> getListener);
+
+    /**
+     * 测试EventBus使用情况，不用回调处理信息
+     * @param api
+     */
+    public void initDisgussList(String api);
 }

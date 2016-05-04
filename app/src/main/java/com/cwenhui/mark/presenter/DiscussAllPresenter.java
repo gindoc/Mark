@@ -48,11 +48,26 @@ public class DiscussAllPresenter implements IPresenter {
     }
 
     /**
+     * 测试，使用EventBus的方式获得数据来初始化讨论区列表
+     */
+    public void initDiscussListForEventBus() {
+        discussModel.initDisgussList(null);
+    }
+
+    /**
      * 刷新讨论区
      * @param direction
      */
     @Override
     public void reflesh(int direction) {
-        initDiscussList();      //暂不做处理
+        initDiscussList();                  //暂不做刷新处理
+    }
+
+    /**
+     * 测试，使用EventBus的方式刷新讨论区
+     * @param direction
+     */
+    public void refleshForEventBus(int direction) {
+        initDiscussListForEventBus();      //暂不做刷新处理
     }
 }

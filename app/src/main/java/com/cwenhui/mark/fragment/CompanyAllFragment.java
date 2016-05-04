@@ -33,8 +33,6 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
     private RecyclerView recyclerView;
     private LinearLayoutManager mLayoutManager;
     private CommonRefreshRecyclerViewAdapter<CompanyAll> adapter;
-//    private int lastVisibleItemPosition;
-//    private boolean isLoading = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,35 +65,6 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        /*recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (adapter == null)  return;   //防止第一次加载时就滑动屏幕造成报空指针异常
-                if (lastVisibleItemPosition + 1 == adapter.getItemCount()) {
-
-                    boolean isRefreshing = swipe.isRefreshing();
-                    if (isRefreshing) {         //防止在下拉刷新时又上拉加载
-                        adapter.notifyItemRemoved(adapter.getItemCount());
-                        return;
-                    }
-                    if (!adapter.isFullScreen()) {      //如果加载的item小于屏幕能装载的个数，则隐藏footerView
-                        return;
-                    }
-                    if (!isLoading) {
-                        isLoading = true;
-                        presenter.reflesh(ICompanyAllModel.PULL_UP);
-                        Log.e(TAG, "loading executed");
-                    }
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition();
-            }
-        });*/
         recyclerView.addOnScrollListener(new RVScrollListener(recyclerView, swipe, presenter));
     }
 
@@ -123,7 +92,6 @@ public class CompanyAllFragment extends Fragment implements ICompanyAllView,
     @Override
     public void hideLoading() {
         swipe.setRefreshing(false);
-//        isLoading = false;
     }
 
     /**
