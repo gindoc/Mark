@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,7 @@ import com.cwenhui.mark.common.ImageFirstDisplayListener;
 import com.cwenhui.mark.common.ImageLoaderHelper;
 import com.cwenhui.mark.common.RVScrollListener;
 import com.cwenhui.mark.configs.Constant;
-import com.cwenhui.mark.presenter.DiscussAllPresenter;
+import com.cwenhui.mark.presenter.DiscussPresenter;
 import com.cwenhui.mark.view.IDiscussView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -29,7 +28,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
-import de.greenrobot.event.Subscribe;
 
 /**
  * Created by cwenhui on 2016.02.23
@@ -38,7 +36,7 @@ public class DiscussFragment extends Fragment implements IDiscussView,
         SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "DiscussFragment";
     private View view;
-    private DiscussAllPresenter presenter;
+    private DiscussPresenter presenter;
     private SwipeRefreshLayout swipe;
     private RecyclerView recyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -47,6 +45,17 @@ public class DiscussFragment extends Fragment implements IDiscussView,
     private DisplayImageOptions options;                                //显示图片的各种设置
     private ImageFirstDisplayListener displayListener = new ImageFirstDisplayListener();
     private Handler mHandler = new Handler();
+    public static final int ALL = 10, TECH = 11, INTERVIEW_EXCE = 12, CHAT = 13, NOTICE = 14, REC_SHARE = 15,
+            QUES = 16, RECRUIT = 17, WORK_FEELING = 18;
+    private int plate;
+
+    public static DiscussFragment newInstance(int plate) {
+        DiscussFragment discussFragment = new DiscussFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("plate", plate);
+        discussFragment.setArguments(bundle);
+        return discussFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,7 +70,8 @@ public class DiscussFragment extends Fragment implements IDiscussView,
         EventBus.getDefault().register(this);
         options = ImageLoaderHelper.getInstance().initImageLoader(getActivity(),
                 imageLoader, Constant.IMAGE_PATH, R.drawable.nowcoder_ic_launcher);
-        presenter = new DiscussAllPresenter(this);
+        presenter = new DiscussPresenter(this);
+        plate = (int) getArguments().get("plate");
     }
 
     private void initView() {
@@ -76,12 +86,14 @@ public class DiscussFragment extends Fragment implements IDiscussView,
                 24, getResources().getDisplayMetrics()));
         swipe.setRefreshing(true);
 
-        presenter.initDiscussListForEventBus();
+//        presenter.initDiscussListForEventBus(plate);
+        presenter.initDiscussList();
     }
 
     @Override
     public void onRefresh() {
-        presenter.refleshForEventBus(Constant.PULL_DOWN);
+//        presenter.refleshForEventBus(plate, Constant.PULL_DOWN);
+        presenter.reflesh(Constant.PULL_DOWN);
     }
 
     @Override
@@ -96,7 +108,7 @@ public class DiscussFragment extends Fragment implements IDiscussView,
                         .setText(R.id.tv_item_fragment_discuss_publish_time, discuss.getPublishTime())
                         .setText(R.id.tv_item_fragment_discuss_topic, discuss.getTopic())
                         .setText(R.id.tv_item_fragment_discuss_content, discuss.getContent())
-                        .setText(R.id.tv_item_fragment_discuss_cat, "["+discuss.getCategory().getDisCatName()+"]")
+                        .setText(R.id.tv_item_fragment_discuss_cat, "[" + discuss.getCategory().getDisCatName() + "]")
                         .setVisibility(R.id.tv_item_fragment_discuss_level,
                                 discuss.getLevel() == 1 ? View.VISIBLE : View.GONE);
                 imageLoader.displayImage(discuss.getDcsImg(), (ImageView)
@@ -107,6 +119,12 @@ public class DiscussFragment extends Fragment implements IDiscussView,
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         setRecyclerViewListener();
+    }
+
+    @Override
+    public void refleshDiscussList(List<Discuss> discusses) {
+        adapter.getmDatas().addAll(discusses);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -129,23 +147,29 @@ public class DiscussFragment extends Fragment implements IDiscussView,
         EventBus.getDefault().unregister(this);//反注册EventBus
     }
 
-    /**
-     * 测试使用EventBus使用情况，感觉使用EventBus后不用presenter了
-     * @param discusses
-     */
-    @Subscribe
-    public void onEventMainThread(final List<Discuss> discusses) {
-        Log.e(TAG, "onEventBackgroundThread");
-        mHandler.post(new Runnable() {          //要在主线程中更新UI
-            @Override
-            public void run() {
-                initDiscussList(discusses);
-                hideLoading();
-                synchronized ((Object) RVScrollListener.isLoading) {
-                    RVScrollListener.isLoading = false;
-                    Log.e(TAG, "isLoading:"+RVScrollListener.isLoading);
-                }
-            }
-        });
-    }
+//    /**
+//     * 测试使用EventBus使用情况，感觉使用EventBus后不用presenter了
+//     *
+//     * @param discusses
+//     */
+//    @Subscribe
+//    public void onEventMainThread(final List<Discuss> discusses) {
+//        Log.e(TAG, "onEventBackgroundThread");
+//        mHandler.post(new Runnable() {          //要在主线程中更新UI
+//            @Override
+//            public void run() {
+//                Log.e(TAG, "onEventMainThread");
+//                if (adapter == null) {
+//                    initDiscussList(discusses);
+//                } else {
+//                    adapter.getmDatas().addAll(discusses);
+//                    adapter.notifyDataSetChanged();
+//                }
+//                hideLoading();
+//                synchronized ((Object) RVScrollListener.isLoading) {
+//                    RVScrollListener.isLoading = false;
+//                }
+//            }
+//        });
+//    }
 }

@@ -14,6 +14,12 @@ public interface IDiscussView {
     void initDiscussList(List<Discuss> discusses);
 
     /**
+     * 刷新讨论区列表
+     * @param discusses
+     */
+    void refleshDiscussList(List<Discuss> discusses);
+
+    /**
      * 隐藏加载进度条
      */
     void hideLoading();

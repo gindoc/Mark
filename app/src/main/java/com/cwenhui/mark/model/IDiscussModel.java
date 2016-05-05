@@ -14,9 +14,14 @@ public interface IDiscussModel {
      */
     public void initDisgussList(String api, OnGetListener<Discuss> getListener);
 
-    /**
-     * 测试EventBus使用情况，不用回调处理信息
-     * @param api
-     */
-    public void initDisgussList(String api);
+    public void reflesh(String api, int direction, OnGetListener<Discuss> getListener);
+
+
+//    /**
+//     * 测试EventBus使用情况，不用回调处理信息
+//     * @param api
+//     */
+//    public void initDisgussList(String api);
+//
+//    public void reflesh(String api, int directon);
 }

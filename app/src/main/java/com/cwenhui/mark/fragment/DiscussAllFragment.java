@@ -19,7 +19,7 @@ import com.cwenhui.mark.common.ImageFirstDisplayListener;
 import com.cwenhui.mark.common.ImageLoaderHelper;
 import com.cwenhui.mark.common.RVScrollListener;
 import com.cwenhui.mark.configs.Constant;
-import com.cwenhui.mark.presenter.DiscussAllPresenter;
+import com.cwenhui.mark.presenter.DiscussPresenter;
 import com.cwenhui.mark.view.IDiscussView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -32,7 +32,7 @@ import java.util.List;
 public class DiscussAllFragment extends Fragment implements IDiscussView,
         SwipeRefreshLayout.OnRefreshListener {
     private View view;
-    private DiscussAllPresenter presenter;
+    private DiscussPresenter presenter;
     private SwipeRefreshLayout swipe;
     private RecyclerView recyclerView;
     private LinearLayoutManager mLayoutManager;
@@ -52,7 +52,7 @@ public class DiscussAllFragment extends Fragment implements IDiscussView,
     private void initData() {
         options = ImageLoaderHelper.getInstance().initImageLoader(getActivity(),
                 imageLoader, Constant.IMAGE_PATH, R.drawable.nowcoder_ic_launcher);
-        presenter = new DiscussAllPresenter(this);
+        presenter = new DiscussPresenter(this);
     }
 
     private void initView() {
@@ -98,6 +98,11 @@ public class DiscussAllFragment extends Fragment implements IDiscussView,
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         setRecyclerViewListener();
+    }
+
+    @Override
+    public void refleshDiscussList(List<Discuss> discusses) {
+
     }
 
     @Override

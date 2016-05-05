@@ -11,9 +11,6 @@ import android.view.MenuItem;
 
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.common.CommonPagerAdapter;
-import com.cwenhui.mark.fragment.CompanyAllFragment;
-import com.cwenhui.mark.fragment.CompanyRecommendFragment;
-import com.cwenhui.mark.fragment.DiscussAllFragment;
 import com.cwenhui.mark.fragment.DiscussFragment;
 
 import java.util.ArrayList;
@@ -47,15 +44,15 @@ public class DisgussActivity extends AppCompatActivity {
 
     private void setupViewPager() {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new DiscussAllFragment());
-        fragments.add(new DiscussFragment());
-        fragments.add(new CompanyRecommendFragment());
-        fragments.add(new CompanyAllFragment());
-        fragments.add(new CompanyRecommendFragment());
-        fragments.add(new CompanyAllFragment());
-        fragments.add(new CompanyRecommendFragment());
-        fragments.add(new CompanyAllFragment());
-        fragments.add(new CompanyRecommendFragment());
+        fragments.add(DiscussFragment.newInstance(DiscussFragment.ALL));
+        fragments.add(DiscussFragment.newInstance(DiscussFragment.TECH));
+        fragments.add(DiscussFragment.newInstance(DiscussFragment.INTERVIEW_EXCE));
+        fragments.add(DiscussFragment.newInstance(DiscussFragment.CHAT));
+        fragments.add(DiscussFragment.newInstance(DiscussFragment.NOTICE));
+        fragments.add(DiscussFragment.newInstance(DiscussFragment.REC_SHARE));
+        fragments.add(DiscussFragment.newInstance(DiscussFragment.QUES));
+        fragments.add(DiscussFragment.newInstance(DiscussFragment.RECRUIT));
+        fragments.add(DiscussFragment.newInstance(DiscussFragment.WORK_FEELING));
         String[] titles = new String[]{"全部", "技术交流", "笔试面经", "随便聊聊", "站内公告",
                 "资源分享", "我要提问", "招聘信息", "工作感受"};
         adapter = new CommonPagerAdapter(getSupportFragmentManager(), titles, fragments);
