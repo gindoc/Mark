@@ -19,6 +19,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
             <TextView
+                android:id="@+id/tv_type_activity_discuss"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="最新"
@@ -44,5 +45,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_activity_discuss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/themeColor"
+        app:rippleColor="#009c80"
+        app:borderWidth="0dp"
+        android:src="@drawable/ic_add"/>
 
 </android.support.design.widget.CoordinatorLayout>

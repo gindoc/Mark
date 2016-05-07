@@ -14,12 +14,16 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * 根据传过来的参数组合成URL，然后调用Model类进行网络请求，然后再回调中处理请求结果（显示到界面上等）
  * Created by cwenhui on 2016.02.23
  */
 public class DiscussPresenter implements IPresenter {
     private IDiscussView discussView;
     private IDiscussModel discussModel;
     private Handler mHandler = new Handler();
+
+    public DiscussPresenter() {
+    }
 
     public DiscussPresenter(IDiscussView discussView) {
         this.discussView = discussView;
@@ -29,7 +33,7 @@ public class DiscussPresenter implements IPresenter {
     /**
      * 初始化讨论区列表
      */
-    public void initDiscussList() {
+    public void initDiscussList(int plate) {
         discussModel.initDisgussList(null, new OnGetListener<Discuss>(){
             @Override
             public void onSuccess(final Collection<Discuss> discusses) {
@@ -54,7 +58,7 @@ public class DiscussPresenter implements IPresenter {
      */
     @Override
     public void reflesh(final int direction) {
-        discussModel.reflesh(null, direction, new OnGetListener<Discuss>(){
+        discussModel.reflesh(null, direction, new OnGetListener<Discuss>() {
             @Override
             public void onSuccess(final Collection<Discuss> discusses) {
                 mHandler.post(new Runnable() {
@@ -75,6 +79,30 @@ public class DiscussPresenter implements IPresenter {
         });
     }
 
+
+    /**
+     * 切换讨论区的类型
+     * 切换后重新加载讨论区数据
+     * @param plate 板块编码
+     * @param type  类型编码
+     */
+    public void switchDiscussType(int plate, String type) {
+        discussModel.initDisgussList(null, new OnGetListener<Discuss>() {
+            @Override
+            public void onSuccess(final Collection<Discuss> discusses) {
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        discussView.initDiscussList((List<Discuss>) discusses);
+                        discussView.hideLoading();
+                        synchronized ((Object) RVScrollListener.isLoading) {
+                            RVScrollListener.isLoading = false;
+                        }
+                    }
+                });
+            }
+        });
+    }
 
 
 //    /**

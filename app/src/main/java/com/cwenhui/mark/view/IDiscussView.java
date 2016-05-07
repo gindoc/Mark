@@ -9,6 +9,21 @@ import java.util.List;
  */
 public interface IDiscussView {
     /**
+     * 最新
+     */
+    public static final String NEWEST = "最新";
+
+    /**
+     * 最热
+     */
+    public static final String HOTEST = "最热";
+
+    /**
+     * 精华
+     */
+    public static final String CREAM = "精华";
+
+    /**
      * 初始化讨论区列表
      */
     void initDiscussList(List<Discuss> discusses);
@@ -18,6 +33,12 @@ public interface IDiscussView {
      * @param discusses
      */
     void refleshDiscussList(List<Discuss> discusses);
+
+    /**
+     * 切换类型
+     * @param type 类型
+     */
+    void switchType(String type);
 
     /**
      * 隐藏加载进度条

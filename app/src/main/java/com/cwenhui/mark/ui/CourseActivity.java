@@ -59,6 +59,7 @@ public class CourseActivity extends AppCompatActivity implements ICourseView,
         toolbar.setNavigationIcon(R.drawable.back);
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_activity_course);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         swipe = (SwipeRefreshLayout) findViewById(R.id.swipe_activity_course);
         swipe.setColorSchemeResources(R.color.swipeColor1, R.color.swipeColor2,
@@ -103,7 +104,6 @@ public class CourseActivity extends AppCompatActivity implements ICourseView,
                         (ImageView) holder.getView(R.id.iv_activity_course_logo), options, displayListener);
             }
         };
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
     }

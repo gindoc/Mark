@@ -27,8 +27,6 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
-
 /**
  * Created by cwenhui on 2016.02.23
  */
@@ -67,7 +65,7 @@ public class DiscussFragment extends Fragment implements IDiscussView,
 
     private void initData() {
         //注册EventBus
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
         options = ImageLoaderHelper.getInstance().initImageLoader(getActivity(),
                 imageLoader, Constant.IMAGE_PATH, R.drawable.nowcoder_ic_launcher);
         presenter = new DiscussPresenter(this);
@@ -77,6 +75,8 @@ public class DiscussFragment extends Fragment implements IDiscussView,
     private void initView() {
         swipe = (SwipeRefreshLayout) view.findViewById(R.id.swipe_fragment_discuss_all);
         recyclerView = (RecyclerView) view.findViewById(R.id.rv_fragment_discuss_all);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
 
         swipe.setColorSchemeResources(R.color.swipeColor1, R.color.swipeColor2,
                 R.color.swipeColor3, R.color.swipeColor4);
@@ -87,7 +87,7 @@ public class DiscussFragment extends Fragment implements IDiscussView,
         swipe.setRefreshing(true);
 
 //        presenter.initDiscussListForEventBus(plate);
-        presenter.initDiscussList();
+        presenter.initDiscussList(plate);
     }
 
     @Override
@@ -118,7 +118,7 @@ public class DiscussFragment extends Fragment implements IDiscussView,
         };
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-        setRecyclerViewListener();
+        recyclerView.addOnScrollListener(new RVScrollListener(recyclerView, swipe, presenter));
     }
 
     @Override
@@ -128,23 +128,20 @@ public class DiscussFragment extends Fragment implements IDiscussView,
     }
 
     @Override
-    public void hideLoading() {
-        swipe.setRefreshing(false);
+    public void switchType(String type) {
+        swipe.setRefreshing(true);
+        presenter.switchDiscussType(plate, type);
     }
 
-    /**
-     * 为RecylerView设置监听
-     */
-    private void setRecyclerViewListener() {
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.addOnScrollListener(new RVScrollListener(recyclerView, swipe, presenter));
+    @Override
+    public void hideLoading() {
+        swipe.setRefreshing(false);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        EventBus.getDefault().unregister(this);//反注册EventBus
+//        EventBus.getDefault().unregister(this);//反注册EventBus
     }
 
 //    /**

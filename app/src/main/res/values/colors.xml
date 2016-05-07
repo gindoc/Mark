@@ -8,6 +8,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="grayFontColor">#B8B8B8</color>
+    <color name="blackFontColor">#454545</color>
     <color name="lightGrayDivider">#abb8b8b8</color>
     <color name="deepGrayFontColor">#747474</color>
     <color name="greenFontColor">#24E5BF</color>

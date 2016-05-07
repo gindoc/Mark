@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_dialog_discuss_newest"
+        android:layout_width="@dimen/x230"
+        android:layout_height="@dimen/x30"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/x10"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginTop="@dimen/x10"
+        android:text="最新"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGrayDivider" />
+
+    <TextView
+        android:id="@+id/tv_dialog_discuss_hotest"
+        android:layout_width="@dimen/x230"
+        android:layout_height="@dimen/x30"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/x10"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginTop="@dimen/x10"
+        android:text="最热"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGrayDivider" />
+
+    <TextView
+        android:id="@+id/tv_dialog_discuss_cream"
+        android:layout_width="@dimen/x280"
+        android:layout_height="@dimen/x30"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/x10"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginTop="@dimen/x10"
+        android:text="精华"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+</LinearLayout>

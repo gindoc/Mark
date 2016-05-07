@@ -67,7 +67,7 @@ public class DiscussAllFragment extends Fragment implements IDiscussView,
                 24, getResources().getDisplayMetrics()));
         swipe.setRefreshing(true);
 
-        presenter.initDiscussList();
+        presenter.initDiscussList(0);
     }
 
     @Override
@@ -102,6 +102,11 @@ public class DiscussAllFragment extends Fragment implements IDiscussView,
 
     @Override
     public void refleshDiscussList(List<Discuss> discusses) {
+
+    }
+
+    @Override
+    public void switchType(String type) {
 
     }
 

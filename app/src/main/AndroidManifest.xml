@@ -30,6 +30,10 @@
         <activity
             android:name=".ui.DisgussActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.PublishTopicActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
