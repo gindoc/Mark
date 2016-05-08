@@ -63,7 +63,7 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
         this.clickListener = clickListener;
     }
 
-    protected void setUpItemEvent(final /*MyViewHolder*/CommondRecyclerViewHolder holder) {
+    protected void setUpItemEvent(final CommondRecyclerViewHolder holder) {
         if (clickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

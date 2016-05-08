@@ -29,7 +29,7 @@ public class IndexPresenter {
     }
 
     /**
-     * 根据item的高度来决定listview的高度,解决scrollview内嵌listview的问题
+     * 根据item的高度来决定gridView的高度,解决scrollview内嵌listview的问题
      * @param gridView
      */
     public void setGridViewHeightBasedOnChildren(GridView gridView, int columns) {

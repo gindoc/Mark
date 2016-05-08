@@ -95,7 +95,6 @@ public class IndexFragment extends Fragment implements IIndexView, AdapterView.O
             case 1:
                 intent = new Intent(getActivity(), CompanySubjectActivity.class);
                 startActivity(intent);
-//                getActivity().overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
                 break;
 
             case 3:

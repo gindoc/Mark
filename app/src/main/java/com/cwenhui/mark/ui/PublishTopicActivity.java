@@ -14,13 +14,17 @@ import com.cwenhui.mark.R;
 import com.cwenhui.mark.presenter.PublishTopicPresenter;
 import com.cwenhui.mark.view.IPublishTopicView;
 
+import java.util.List;
+
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class PublishTopicActivity extends AppCompatActivity implements IPublishTopicView{
+public class PublishTopicActivity extends AppCompatActivity implements IPublishTopicView {
     private PublishTopicPresenter presenter;
     private LinearLayout llPlates;
-    private EditText etTopic, etContent;
+    private EditText etTitle, etContent;
+    private String plate = null;
+    private List<String> tags = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,7 @@ public class PublishTopicActivity extends AppCompatActivity implements IPublishT
         toolbar.setNavigationIcon(R.drawable.back);
 
         llPlates = (LinearLayout) findViewById(R.id.ll_activity_publish_topic_plate);
-        etTopic = (EditText) findViewById(R.id.et_activity_publish_topic_topic);
+        etTitle = (EditText) findViewById(R.id.et_activity_publish_topic_title);
         etContent = (EditText) findViewById(R.id.et_activity_publish_topic_content);
     }
 
@@ -58,9 +62,7 @@ public class PublishTopicActivity extends AppCompatActivity implements IPublishT
                 break;
 
             case R.id.publish_topic_publish:
-                presenter.checkPlatesOrTags(PublishTopicActivity.this, llPlates);
-                presenter.isTopicEmpty(etTopic);
-                presenter.isContentEmpty(etContent);
+                presenter.checkMessage();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -79,9 +81,24 @@ public class PublishTopicActivity extends AppCompatActivity implements IPublishT
         Toast.makeText(this, tips, Toast.LENGTH_SHORT).show();
     }
 
-    //    @Override
-//    public void toPlatesActivity() {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        startActivityForResult(intent, RESULT_FIRST_USER);
-//    }
+    @Override
+    public String getPlate() {
+        return plate;
+    }
+
+    @Override
+    public CharSequence getTopicTitle() {
+        return etTitle.getText();
+    }
+
+    @Override
+    public CharSequence getContent() {
+        return etContent.getText();
+    }
+
+        @Override
+    public void toPlatesActivity() {
+        Intent intent = new Intent(this, PlatesActivity.class);
+        startActivityForResult(intent, RESULT_FIRST_USER);
+    }
 }

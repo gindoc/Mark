@@ -1,5 +1,7 @@
 package com.cwenhui.mark.bean;
 
+import java.util.List;
+
 /**
  * Created by cwenhui on 2016.02.23
  */
@@ -11,6 +13,7 @@ public class Discuss {
     private int level;          //0 置顶  1 精华
     private String topic;       //
     private String content;
+    private List<String> tags;
 
     public Discuss(String dcsImg, String dcsName, String publishTime, int level, String topic, String content) {
         this.dcsImg = dcsImg;
@@ -75,5 +78,13 @@ public class Discuss {
 
     public void setCategory(DiscussCategory category) {
         this.category = category;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 }

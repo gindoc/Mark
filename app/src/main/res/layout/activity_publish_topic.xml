@@ -48,7 +48,7 @@
         android:background="@color/lightGrayDivider" />
 
     <EditText
-        android:id="@+id/et_activity_publish_topic_topic"
+        android:id="@+id/et_activity_publish_topic_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x50"
         android:background="@color/transparent"

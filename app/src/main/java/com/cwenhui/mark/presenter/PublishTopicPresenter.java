@@ -1,13 +1,8 @@
 package com.cwenhui.mark.presenter;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
-import com.cwenhui.mark.MainActivity;
-import com.cwenhui.mark.common.TextUtils;
+import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.model.IPublishTopicModel;
+import com.cwenhui.mark.model.impl.PublishTopicModel;
 import com.cwenhui.mark.view.IPublishTopicView;
 
 /**
@@ -15,32 +10,32 @@ import com.cwenhui.mark.view.IPublishTopicView;
  */
 public class PublishTopicPresenter {
     IPublishTopicView view;
+    IPublishTopicModel model;
 
     public PublishTopicPresenter(IPublishTopicView view) {
         this.view = view;
+        this.model = new PublishTopicModel();
     }
 
-    public void checkPlatesOrTags(Activity activity, LinearLayout llPlates) {
-        if(llPlates.getChildCount()<3) {
-            // TODO: 2016/5/7 跳转到PlatesActivity添加板块信息
-            Toast.makeText(activity, "请设置板块、标签", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(activity, MainActivity.class);
-            activity.startActivityForResult(intent, activity.RESULT_FIRST_USER);
+    public void checkMessage() {
+        if(view.getPlate() == null){
+            view.ShowTips("设置板块、标签");
+            view.toPlatesActivity();
+            return;
         }
-
-    }
-
-    public void isTopicEmpty(EditText topic) {
-        if(TextUtils.isEmpty(topic.getText())) {
+        if (view.getTopicTitle() == null) {
             view.ShowTips("标题不能为空");
             return;
         }
-    }
-
-    public void isContentEmpty(EditText content) {
-        if (TextUtils.isEmpty(content.getText())) {
+        if (view.getContent() == null) {
             view.ShowTips("内容不能为空");
             return;
         }
+        model.publishTopic(null, new OnGetListener<String>(){
+            @Override
+            public void onSuccess(String s) {
+                view.ShowTips("发表成功");
+            }
+        });
     }
 }
