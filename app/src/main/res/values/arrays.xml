@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tagsInPlatesActivity">
+        <item>百度</item>
+        <item>腾讯</item>
+        <item>去哪儿</item>
+        <item>人人</item>
+        <item>微博</item>
+        <item>阿里巴巴</item>
+        <item>携程</item>
+        <item>奇虎360</item>
+        <item>谷歌</item>
+        <item>微软</item>
+        <item>小米</item>
+        <item>java工程师</item>
+        <item>搜狐</item>
+        <item>网易</item>
+        <item>唯品会</item>
+        <item>京东</item>
+        <item>迅雷</item>
+        <item>华为</item>
+        <item>滴滴</item>
+        <item>蘑菇街</item>
+        <item>php工程师</item>
+        <item>58</item>
+        <item>网龙</item>
+        <item>算法工程师</item>
+        <item>前端工程师</item>
+        <item>完美世界</item>
+        <item>ios工程师</item>
+        <item>C++</item>
+        <item>运维工程师</item>
+        <item>安卓工程师</item>
+        <item>大众点评</item>
+        <item>中兴</item>
+        <item>今日头条</item>
+        <item>CVTE</item>
+        <item>微店</item>
+        <item>美团</item>
+        <item>搜狗</item>
+    </string-array>
+    <!--String[] t = new String[]{"百度", "腾讯", "去哪儿", "人人", "微博", "阿里巴巴", "携程", "奇虎360",
+    "谷歌", "微软", "小米", "java工程师", "搜狐", "网易", "唯品会", "京东",
+    "迅雷", "华为", "滴滴", "蘑菇街", "php工程师", "58", "网龙", "算法工程师",
+    "前端工程师", "完美世界", "ios工程师", "C++", "运维工程师", "安卓工程师", "大众点评", "中兴",
+    "今日头条", "CVTE", "微店", "美团", "搜狗"};-->
+
+
+    <string-array name="platesInPlateActivity">
+        <item>技术交流</item>
+        <item>笔试面经</item>
+        <item>随便聊聊</item>
+        <item>资源分享</item>
+        <item>我要提问</item>
+        <item>招聘信息</item>
+        <item>工作感受</item>
+    </string-array>
+    <!--String[] p = new String[]{"技术交流", "笔试面经", "随便聊聊", "资源分享", "我要提问",
+                "招聘信息", "工作感受"};-->
+</resources>

@@ -2,12 +2,15 @@ package com.cwenhui.mark.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cwenhui.mark.R;
@@ -19,9 +22,12 @@ import java.util.List;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class PublishTopicActivity extends AppCompatActivity implements IPublishTopicView {
+public class PublishTopicActivity extends AppCompatActivity implements IPublishTopicView, View.OnClickListener {
+    public static final String SELECTED_TAGS = "selectedTags";
+    public static final String SELECTED_PLATE = "selectedPlate";
+    private static final int SELECTED_PLATE_ID = Integer.MAX_VALUE;
     private PublishTopicPresenter presenter;
-    private LinearLayout llPlates;
+    private RelativeLayout rlPlates;
     private EditText etTitle, etContent;
     private String plate = null;
     private List<String> tags = null;
@@ -42,9 +48,11 @@ public class PublishTopicActivity extends AppCompatActivity implements IPublishT
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
 
-        llPlates = (LinearLayout) findViewById(R.id.ll_activity_publish_topic_plate);
+        rlPlates = (RelativeLayout) findViewById(R.id.rl_activity_publish_topic_plate);
         etTitle = (EditText) findViewById(R.id.et_activity_publish_topic_title);
         etContent = (EditText) findViewById(R.id.et_activity_publish_topic_content);
+
+        rlPlates.setOnClickListener(this);
     }
 
     @Override
@@ -62,7 +70,10 @@ public class PublishTopicActivity extends AppCompatActivity implements IPublishT
                 break;
 
             case R.id.publish_topic_publish:
-                presenter.checkMessage();
+                presenter.checkMessage(tags);
+                break;
+            case R.id.rl_activity_publish_topic_plate:
+                toPlatesActivity();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -71,7 +82,9 @@ public class PublishTopicActivity extends AppCompatActivity implements IPublishT
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RESULT_FIRST_USER && resultCode == RESULT_OK) {
-            // TODO: 2016/5/7 处理板块信息，将板块信息添加到llPlates,还有tags
+            tags = data.getStringArrayListExtra(SELECTED_TAGS);
+            plate = data.getStringExtra(SELECTED_PLATE);
+            addPlate(plate);
         }
 
     }
@@ -96,9 +109,34 @@ public class PublishTopicActivity extends AppCompatActivity implements IPublishT
         return etContent.getText();
     }
 
-        @Override
+    @Override
+    public void addPlate(String plate) {
+        TextView tvPlate = (TextView) findViewById(SELECTED_PLATE_ID);
+        if (tvPlate == null) {
+            tvPlate = new TextView(this);
+            tvPlate.setId(SELECTED_PLATE_ID);       //设置id
+            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+            lp.addRule(RelativeLayout.LEFT_OF, R.id.iv_activity_publish_topic_plate);
+            lp.rightMargin = (int) getResources().getDimension(R.dimen.x10);
+            rlPlates.addView(tvPlate, lp);
+        }
+        tvPlate.setText(plate);
+        tvPlate.setTextColor(ContextCompat.getColor(this, R.color.themeColor));
+    }
+
+    @Override
     public void toPlatesActivity() {
         Intent intent = new Intent(this, PlatesActivity.class);
         startActivityForResult(intent, RESULT_FIRST_USER);
+        overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, PlatesActivity.class);
+        intent.putExtra(SELECTED_PLATE, plate);
+        startActivityForResult(intent, RESULT_FIRST_USER);
+        overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
     }
 }

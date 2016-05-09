@@ -1,41 +1,59 @@
 package com.cwenhui.mark.presenter;
 
+import android.os.Handler;
+
+import com.cwenhui.mark.bean.Discuss;
 import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.TextUtils;
 import com.cwenhui.mark.model.IPublishTopicModel;
 import com.cwenhui.mark.model.impl.PublishTopicModel;
 import com.cwenhui.mark.view.IPublishTopicView;
+
+import java.util.List;
 
 /**
  * Created by cwenhui on 2016.02.23
  */
 public class PublishTopicPresenter {
-    IPublishTopicView view;
-    IPublishTopicModel model;
+    private IPublishTopicView view;
+    private IPublishTopicModel model;
+    private Handler mHandler = new Handler();
 
     public PublishTopicPresenter(IPublishTopicView view) {
         this.view = view;
         this.model = new PublishTopicModel();
     }
 
-    public void checkMessage() {
-        if(view.getPlate() == null){
+    /**
+     * 检测信息填写是否完整
+     */
+    public void checkMessage(final List<String> tags) {
+        if (view.getPlate() == null) {
             view.ShowTips("设置板块、标签");
             view.toPlatesActivity();
             return;
         }
-        if (view.getTopicTitle() == null) {
+        if (TextUtils.isEmpty(view.getTopicTitle())) {
             view.ShowTips("标题不能为空");
             return;
         }
-        if (view.getContent() == null) {
+        if (TextUtils.isEmpty(view.getContent())) {
             view.ShowTips("内容不能为空");
             return;
         }
-        model.publishTopic(null, new OnGetListener<String>(){
+        Discuss discuss = new Discuss();
+        discuss.setTags(tags);
+        model.publishTopic(discuss, new OnGetListener<String>() {
             @Override
             public void onSuccess(String s) {
-                view.ShowTips("发表成功");
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.ShowTips("发表成功");
+                    }
+                });
             }
         });
     }
+
 }

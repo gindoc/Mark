@@ -1,5 +1,6 @@
 package com.cwenhui.mark.ui;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.cwenhui.mark.R;
@@ -23,16 +25,14 @@ import java.util.Map;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class PlatesActivity extends AppCompatActivity {
-    private static final String SELECTED_TAG = "selectedTags";
+public class PlatesActivity extends AppCompatActivity implements View.OnLayoutChangeListener {
     private RecyclerView rvPlate;
-    private RecyclerView rvTags;
     private Map<String, Boolean> stateOftags;           //存放每个tag的状态，true为被选中，false为未被选中
     private List<String> tags;                          //存放tag的名字
     private List<String> selectedTags = new ArrayList<String>();    //存放被选中tag
     private CommonRecyclerViewAdapter<String> tagsAdapter;
-    private List<String> plates;
-    private Map<String, Integer> selectedPlate = new HashMap<String, Integer>();
+    private List<String> plates;                        //存放plate的名字
+    private int lastSelectedPos;                        //存放上一个被选中的view在recycler中的位置
     private CommonRecyclerViewAdapter<String> plateAdapter;
 
     @Override
@@ -47,12 +47,7 @@ public class PlatesActivity extends AppCompatActivity {
     private void initData() {
         stateOftags = new HashMap<>();
         tags = new ArrayList<String>();
-        String[] t = new String[]{"百度", "腾讯", "去哪儿", "人人", "微博", "阿里巴巴", "携程", "奇虎360",
-                "谷歌", "微软", "小米", "java工程师", "搜狐", "网易", "唯品会", "京东",
-                "迅雷", "华为", "滴滴", "蘑菇街", "php工程师", "58", "网龙", "算法工程师",
-                "前端工程师", "完美世界", "ios工程师", "C++", "运维工程师", "安卓工程师", "大众点评", "中兴",
-                "今日头条", "CVTE", "微店", "美团", "搜狗"};
-        tags.addAll(Arrays.asList(t));
+        tags.addAll(Arrays.asList(getResources().getStringArray(R.array.tagsInPlatesActivity)));
         for (String s : tags) {
             stateOftags.put(s, false);          //将每个tag的初始状态都设为未选中 false
         }
@@ -64,10 +59,8 @@ public class PlatesActivity extends AppCompatActivity {
             }
         };
 
-        String[] p = new String[]{"技术交流", "笔试面经", "随便聊聊", "资源分享", "我要提问",
-                "招聘信息", "工作感受"};
         plates = new ArrayList<String>();
-        plates.addAll(Arrays.asList(p));
+        plates.addAll(Arrays.asList(getResources().getStringArray(R.array.platesInPlateActivity)));
         plateAdapter = new CommonRecyclerViewAdapter<String>(this, R.layout.item_activity_plates_plate, plates) {
             @Override
             public void convert(CommondRecyclerViewHolder holder, String s) {
@@ -75,6 +68,8 @@ public class PlatesActivity extends AppCompatActivity {
                 setUpItemEvent(holder);
             }
         };
+        //接收之前选中的view在recyclerView中的位置，如果之前为选中过，则找不到值（为-1）
+        lastSelectedPos = plates.indexOf(getIntent().getStringExtra(PublishTopicActivity.SELECTED_PLATE));
     }
 
     private void initView() {
@@ -84,13 +79,14 @@ public class PlatesActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.back);
 
-        rvTags = (RecyclerView) findViewById(R.id.rv_activity_plates_tags);
+        RecyclerView rvTags = (RecyclerView) findViewById(R.id.rv_activity_plates_tags);
         rvTags.setLayoutManager(new FullyGridLayoutManager(this, 4));
         rvTags.setAdapter(tagsAdapter);
 
         rvPlate = (RecyclerView) findViewById(R.id.rv_activity_plates_plate);
         rvPlate.setLayoutManager(new FullyGridLayoutManager(this, 4));
         rvPlate.setAdapter(plateAdapter);
+        rvPlate.addOnLayoutChangeListener(this);    //当Activity被加载出来或ListView里面的Item被加载出来时执行
 
         tagsAdapter.setClickListener(new TagsItemClickListener());
         plateAdapter.setClickListener(new PlateItemClickListener());
@@ -100,6 +96,29 @@ public class PlatesActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_special_practice, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent();
+                intent.putStringArrayListExtra(PublishTopicActivity.SELECTED_TAGS,
+                        (ArrayList<String>) selectedTags);
+                intent.putExtra(PublishTopicActivity.SELECTED_PLATE,
+                                    lastSelectedPos == -1 ? null : plates.get(lastSelectedPos));
+                setResult(RESULT_OK, intent);
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+        if (lastSelectedPos != 0xffffffff) {        //若之前没有选中的view，则不做处理
+            setPlateSelected(rvPlate.getChildAt(lastSelectedPos), lastSelectedPos);
+        }
     }
 
     class TagsItemClickListener implements CommonRecyclerViewAdapter.onItemClickListener {
@@ -112,11 +131,13 @@ public class PlatesActivity extends AppCompatActivity {
                         R.drawable.tags_background_activity_plates);
                 view.findViewById(R.id.tv_item_activity_plates_tags).setBackground(drawable);
                 stateOftags.put(tag, false);
+                selectedTags.remove(tag);
             } else {
                 Drawable drawable = ContextCompat.getDrawable(PlatesActivity.this,
                         R.drawable.tags_background_activity_plates_pressed);
                 view.findViewById(R.id.tv_item_activity_plates_tags).setBackground(drawable);
                 stateOftags.put(tag, true);
+                selectedTags.add(tag);
             }
         }
 
@@ -129,23 +150,32 @@ public class PlatesActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(View view, int pos) {
-            Drawable pressed = ContextCompat.getDrawable(PlatesActivity.this,
-                    R.drawable.plate_background_activity_plates_pressed);
-            view.findViewById(R.id.tv_item_activity_plates_plate).setBackground(pressed);
-            if (selectedPlate.size() != 0) {
-                int lastPos = selectedPlate.get(SELECTED_TAG);
-                View lastView = rvPlate.getChildAt(lastPos).findViewById(R.id.tv_item_activity_plates_plate);
-                Drawable normal = ContextCompat.getDrawable(PlatesActivity.this,
-                        R.drawable.plate_background_activity_plates);
-                lastView.setBackground(normal);
-            }
-            selectedPlate.put(SELECTED_TAG, pos);
-
+            setPlateSelected(view, pos);
         }
 
         @Override
         public void onItemLongClick(View view, int pos) {
         }
+    }
+
+    /**
+     * 设置view为选中状态
+     * @param view  选中的view
+     * @param pos   view在recyclerView中的位置
+     */
+    private void setPlateSelected(View view, int pos) {
+        Drawable pressed = ContextCompat.getDrawable(PlatesActivity.this,
+                R.drawable.plate_background_activity_plates_pressed);
+        view.findViewById(R.id.tv_item_activity_plates_plate).setBackground(pressed);
+        //若之前没有被选中view，则lastSelectedPos为-1
+        if (lastSelectedPos != 0xffffffff && lastSelectedPos != pos) {
+            View lastView = rvPlate.getChildAt(lastSelectedPos)
+                    .findViewById(R.id.tv_item_activity_plates_plate);
+            Drawable normal = ContextCompat.getDrawable(PlatesActivity.this,
+                    R.drawable.plate_background_activity_plates);
+            lastView.setBackground(normal);
+        }
+        lastSelectedPos = pos;
     }
 
 }

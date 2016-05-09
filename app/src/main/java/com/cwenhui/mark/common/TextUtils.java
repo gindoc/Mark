@@ -12,8 +12,8 @@ public class TextUtils {
      */
     public static boolean isEmpty(CharSequence sequence) {
         if (sequence == null || sequence.toString().trim().length() == 0) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }

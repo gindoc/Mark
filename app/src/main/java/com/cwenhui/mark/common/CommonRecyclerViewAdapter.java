@@ -63,6 +63,10 @@ public abstract class CommonRecyclerViewAdapter<T> extends RecyclerView.Adapter<
         this.clickListener = clickListener;
     }
 
+    /**
+     * 为item的设置监听
+     * @param holder
+     */
     protected void setUpItemEvent(final CommondRecyclerViewHolder holder) {
         if (clickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {

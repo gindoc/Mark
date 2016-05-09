@@ -30,4 +30,10 @@ public interface IPublishTopicView {
      * @return
      */
     CharSequence getContent();
+
+    /**
+     * 添加板块
+     * @param plate
+     */
+    void addPlate(String plate);
 }

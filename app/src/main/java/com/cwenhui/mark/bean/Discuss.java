@@ -15,6 +15,9 @@ public class Discuss {
     private String content;
     private List<String> tags;
 
+    public Discuss() {
+    }
+
     public Discuss(String dcsImg, String dcsName, String publishTime, int level, String topic, String content) {
         this.dcsImg = dcsImg;
         this.dcsName = dcsName;
