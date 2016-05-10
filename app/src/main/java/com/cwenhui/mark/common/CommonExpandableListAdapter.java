@@ -40,7 +40,6 @@ public abstract class CommonExpandableListAdapter implements ExpandableListAdapt
     }
 
     @Override
-
     public void registerDataSetObserver(DataSetObserver observer) {
     }
 

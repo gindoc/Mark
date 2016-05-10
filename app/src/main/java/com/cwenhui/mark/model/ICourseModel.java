@@ -1,6 +1,6 @@
 package com.cwenhui.mark.model;
 
-import com.cwenhui.mark.bean.Course;
+import com.cwenhui.mark.bean.CourseVideo;
 import com.cwenhui.mark.common.OnGetListener;
 
 /**
@@ -12,6 +12,6 @@ public interface ICourseModel {
      * @param api
      * @return
      */
-    public void getCourses(String api, OnGetListener<Course> getListener);
+    public void getCourses(String api, OnGetListener<CourseVideo> getListener);
 
 }

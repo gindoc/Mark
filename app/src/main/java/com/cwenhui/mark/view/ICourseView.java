@@ -1,6 +1,6 @@
 package com.cwenhui.mark.view;
 
-import com.cwenhui.mark.bean.Course;
+import com.cwenhui.mark.bean.CourseVideo;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public interface ICourseView {
      * 初始化课程列表
      * @param courses
      */
-    public void initCoursesList(List<Course> courses);
+    public void initCoursesList(List<CourseVideo> courses);
 
     /**
      * 隐藏加载进度条

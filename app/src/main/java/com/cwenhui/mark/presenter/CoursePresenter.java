@@ -2,7 +2,7 @@ package com.cwenhui.mark.presenter;
 
 import android.os.Handler;
 
-import com.cwenhui.mark.bean.Course;
+import com.cwenhui.mark.bean.CourseVideo;
 import com.cwenhui.mark.common.OnGetListener;
 import com.cwenhui.mark.model.ICourseModel;
 import com.cwenhui.mark.model.impl.CourseModel;
@@ -28,13 +28,13 @@ public class CoursePresenter {
      * 初始化课程列表
      */
     public void initCoursesList() {
-        courseModel.getCourses(null, new OnGetListener<Course>(){
+        courseModel.getCourses(null, new OnGetListener<CourseVideo>(){
             @Override
-            public void onSuccess(final Collection<Course> courses) {
+            public void onSuccess(final Collection<CourseVideo> courses) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        courseView.initCoursesList((List<Course>) courses);
+                        courseView.initCoursesList((List<CourseVideo>) courses);
                         courseView.hideLoading();
                     }
                 });

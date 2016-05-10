@@ -3,7 +3,7 @@ package com.cwenhui.mark.presenter;
 import android.support.v4.app.Fragment;
 
 import com.cwenhui.mark.fragment.DiscussFragment;
-import com.cwenhui.mark.view.IDiscussActivityView;
+import com.cwenhui.mark.view.IDiscussAView;
 import com.cwenhui.mark.view.IDiscussView;
 
 import java.util.List;
@@ -11,10 +11,10 @@ import java.util.List;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class DiscussActivityPresenter {
-    private IDiscussActivityView view;
+public class DiscussAPresenter {
+    private IDiscussAView view;
 
-    public DiscussActivityPresenter(IDiscussActivityView view) {
+    public DiscussAPresenter(IDiscussAView view) {
         this.view = view;
     }
 

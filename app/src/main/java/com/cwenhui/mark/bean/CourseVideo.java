@@ -3,13 +3,13 @@ package com.cwenhui.mark.bean;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class Course {
+public class CourseVideo {
     private String courseImg;
     private String courseName;
     private int courseNum;
     private int participants;
 
-    public Course(String courseImg, String courseName, int courseNum, int participants) {
+    public CourseVideo(String courseImg, String courseName, int courseNum, int participants) {
         this.courseImg = courseImg;
         this.courseName = courseName;
         this.courseNum = courseNum;

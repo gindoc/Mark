@@ -1,5 +1,6 @@
 package com.cwenhui.mark.ui;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.bean.Practice;
@@ -29,7 +31,7 @@ import java.util.List;
  * Created by cwenhui on 2016.02.23
  */
 public class SpecialPracticeActivity extends AppCompatActivity implements ISpecialPracticeView,
-        SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
+        SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener, ExpandableListView.OnChildClickListener {
     private static final String TAG = "SpecialPracticeActivity";
     private Toolbar toolbar;
     private ExpandableListView listView;
@@ -61,9 +63,10 @@ public class SpecialPracticeActivity extends AppCompatActivity implements ISpeci
         swipe.setRefreshing(true);
 
         listView = (ExpandableListView) findViewById(R.id.expandablelv_activity_special_practice);
-        listView.setGroupIndicator(null);
+        listView.setGroupIndicator(null);       //去掉ExpandableListView的item前的图标
         listView.setChildIndicator(null);
         listView.setOnScrollListener(this);
+        listView.setOnChildClickListener(this);
         presenter.initSpecialPracticeList();
     }
 
@@ -171,4 +174,14 @@ public class SpecialPracticeActivity extends AppCompatActivity implements ISpeci
         }
         swipe.setEnabled(enable);
     }
+
+    @Override
+    public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+        Toast.makeText(this, "click", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(SpecialPracticeActivity.this, KnowledgePointActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+        return true;
+    }
+
 }

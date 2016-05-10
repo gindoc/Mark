@@ -26,7 +26,7 @@ import static com.cwenhui.mark.R.id.toolbar_activity_company_subject;
 public class CompanySubjectActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
-    private CommonPagerAdapter adapter;
+//    private CommonPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class CompanySubjectActivity extends AppCompatActivity {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(new CompanyRecommendFragment());
         fragments.add(new CompanyAllFragment());
-        adapter = new CommonPagerAdapter(getSupportFragmentManager(), new String[]{"推荐", "全部"}, fragments);
+        CommonPagerAdapter adapter = new CommonPagerAdapter(getSupportFragmentManager(), new String[]{"推荐", "全部"}, fragments);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }

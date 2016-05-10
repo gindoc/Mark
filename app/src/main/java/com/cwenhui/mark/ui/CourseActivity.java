@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.cwenhui.mark.R;
-import com.cwenhui.mark.bean.Course;
+import com.cwenhui.mark.bean.CourseVideo;
 import com.cwenhui.mark.common.CommonRecyclerViewAdapter;
 import com.cwenhui.mark.common.CommondRecyclerViewHolder;
 import com.cwenhui.mark.common.ImageFirstDisplayListener;
@@ -33,7 +33,7 @@ public class CourseActivity extends AppCompatActivity implements ICourseView,
     private CoursePresenter presenter;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout swipe;
-    private CommonRecyclerViewAdapter<Course> adapter;
+    private CommonRecyclerViewAdapter<CourseVideo> adapter;
     private ImageLoader imageLoader = ImageLoader.getInstance();
     private DisplayImageOptions options;								//显示图片的各种设置
     private ImageFirstDisplayListener displayListener = new ImageFirstDisplayListener();
@@ -93,10 +93,10 @@ public class CourseActivity extends AppCompatActivity implements ICourseView,
     }
 
     @Override
-    public void initCoursesList(List<Course> courses) {
-        adapter = new CommonRecyclerViewAdapter<Course>(this, R.layout.item_activity_course, courses) {
+    public void initCoursesList(List<CourseVideo> courses) {
+        adapter = new CommonRecyclerViewAdapter<CourseVideo>(this, R.layout.item_activity_course, courses) {
             @Override
-            public void convert(CommondRecyclerViewHolder holder, Course course) {
+            public void convert(CommondRecyclerViewHolder holder, CourseVideo course) {
                 holder.setText(R.id.tv_activity_course_name, course.getCourseName())
                 .setText(R.id.tv_activity_course_num, "共"+course.getCourseNum()+"章")
                 .setText(R.id.tv_activity_course_ppts, course.getParticipants() + "人练习");

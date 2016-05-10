@@ -17,8 +17,8 @@ import com.cwenhui.mark.R;
 import com.cwenhui.mark.common.CommonPagerAdapter;
 import com.cwenhui.mark.common.DialogViewHolder;
 import com.cwenhui.mark.fragment.DiscussFragment;
-import com.cwenhui.mark.presenter.DiscussActivityPresenter;
-import com.cwenhui.mark.view.IDiscussActivityView;
+import com.cwenhui.mark.presenter.DiscussAPresenter;
+import com.cwenhui.mark.view.IDiscussAView;
 import com.cwenhui.mark.view.IDiscussView;
 import com.cwenhui.mark.widget.CustomDialog;
 
@@ -29,8 +29,8 @@ import java.util.Map;
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class DisgussActivity extends AppCompatActivity implements IDiscussActivityView,View.OnClickListener {
-    private DiscussActivityPresenter presenter;
+public class DisgussActivity extends AppCompatActivity implements IDiscussAView,View.OnClickListener {
+    private DiscussAPresenter presenter;
     private FloatingActionButton mFAB;
     private TextView mType;
     private CustomDialog mDialog;
@@ -47,7 +47,7 @@ public class DisgussActivity extends AppCompatActivity implements IDiscussActivi
     }
 
     private void initView() {
-        presenter = new DiscussActivityPresenter(this);
+        presenter = new DiscussAPresenter(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_activity_discuss);
         toolbar.setTitle("");
