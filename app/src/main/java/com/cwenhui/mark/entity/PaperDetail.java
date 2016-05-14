@@ -1,11 +1,12 @@
 package com.cwenhui.mark.entity;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by cwenhui on 2016.02.23
  */
-public class PaperDetail implements Serializable {
+public class PaperDetail implements Parcelable {
     private String pdId;
     private Paper paper;
     private SingleProblem singleProblem;
@@ -71,5 +72,45 @@ public class PaperDetail implements Serializable {
 
     public void setPdMark(int pdMark) {
         this.pdMark = pdMark;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(pdId);
+        dest.writeSerializable(paper);
+        dest.writeSerializable(singleProblem);
+        dest.writeSerializable(mulProblem);
+        dest.writeSerializable(fillBlankProblem);
+        dest.writeSerializable(shortAnswerProblem);
+        dest.writeInt(pdMark);
+    }
+
+    public static final Parcelable.Creator<PaperDetail> CREATOR = new Parcelable.Creator<PaperDetail>(){
+
+        @Override
+        public PaperDetail createFromParcel(Parcel in) {
+            return new PaperDetail(in);				//从Parcel中读取数据的顺序要和写入Parcel中的顺序一样(即和writeToParcel()方法中的写入保持一样的顺序),否则会报错
+        }
+
+        @Override
+        public PaperDetail[] newArray(int size) {
+            return new PaperDetail[size];
+        }
+
+    };
+
+    private PaperDetail(Parcel in) {
+        pdId = in.readString();
+        paper = (Paper) in.readSerializable();
+        singleProblem = (SingleProblem) in.readSerializable();
+        mulProblem = (MulProblem) in.readSerializable();
+        fillBlankProblem = (FillBlankProblem) in.readSerializable();
+        shortAnswerProblem = (ShortAnswerProblem) in.readSerializable();
+        pdMark = in.readInt();
     }
 }

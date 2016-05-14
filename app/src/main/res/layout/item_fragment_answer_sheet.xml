@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_marginTop="@dimen/x40"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_item_fragment_answer_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/choice_question_option_normal"
+        android:gravity="center"
+        android:text="A"
+        android:textColor="@color/blackFontColor"
+        android:textSize="16sp" />
+
+</LinearLayout>

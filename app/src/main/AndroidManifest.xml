@@ -42,6 +42,9 @@
         <activity
             android:name=".ui.KnowledgePointActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.ExaminationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.bean.Practice;
@@ -177,8 +176,8 @@ public class SpecialPracticeActivity extends AppCompatActivity implements ISpeci
 
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-        Toast.makeText(this, "click", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(SpecialPracticeActivity.this, KnowledgePointActivity.class);
+//        Intent intent = new Intent(SpecialPracticeActivity.this, KnowledgePointActivity.class);
+        Intent intent = new Intent(SpecialPracticeActivity.this, ExaminationActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
         return true;

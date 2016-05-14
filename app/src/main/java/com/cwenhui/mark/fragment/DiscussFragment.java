@@ -138,11 +138,11 @@ public class DiscussFragment extends Fragment implements IDiscussView,
         swipe.setRefreshing(false);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
 //        EventBus.getDefault().unregister(this);//反注册EventBus
-    }
+//    }
 
 //    /**
 //     * 测试使用EventBus使用情况，感觉使用EventBus后不用presenter了

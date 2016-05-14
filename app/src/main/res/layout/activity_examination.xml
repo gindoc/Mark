@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_activity_knowledge_ponit"
+        android:id="@+id/toolbar_activity_examination"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/toolBar"
@@ -14,7 +14,7 @@
 
 
         <Chronometer
-            android:id="@+id/chronometer_activity_knowledge_ponit"
+            android:id="@+id/chronometer_activity_examination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -26,7 +26,7 @@
             android:textSize="16sp" />
 
         <ImageView
-            android:id="@+id/iv_activity_knowledge_ponit"
+            android:id="@+id/iv_activity_examination_completion_state"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -35,7 +35,7 @@
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/vp_activity_knowledge_point"
+        android:id="@+id/vp_activity_examination"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
@@ -47,7 +47,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_activity_knowledge_point_pre"
+            android:id="@+id/btn_activity_examination_pre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -57,7 +57,7 @@
             android:textSize="16sp" />
 
         <Button
-            android:id="@+id/btn_activity_knowledge_point_next"
+            android:id="@+id/btn_activity_examination_next"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
