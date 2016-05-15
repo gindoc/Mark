@@ -176,7 +176,6 @@ public class SpecialPracticeActivity extends AppCompatActivity implements ISpeci
 
     @Override
     public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-//        Intent intent = new Intent(SpecialPracticeActivity.this, KnowledgePointActivity.class);
         Intent intent = new Intent(SpecialPracticeActivity.this, ExaminationActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.zoomin, R.anim.zoomout);

@@ -1,6 +1,6 @@
 package com.cwenhui.mark.model.impl;
 
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.entity.Practice;
 import com.cwenhui.mark.entity.PracticeCategory;
@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class ExaminationModel implements IExaminationModel {
     @Override
-    public void getPaperDetail(String api, final OnGetListener<Practice> getListener) {
+    public void getPaperDetail(String api, final OnResponseListener<Practice> getListener) {
         new Thread(new Runnable() {
             @Override
             public void run() {

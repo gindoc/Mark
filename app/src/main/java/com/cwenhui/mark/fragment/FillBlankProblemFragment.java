@@ -18,6 +18,7 @@ import com.cwenhui.mark.common.CommondRecyclerViewHolder;
 import com.cwenhui.mark.common.MyEvent;
 import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.entity.Practice;
+import com.cwenhui.mark.presenter.ProblemPresenter;
 import com.cwenhui.mark.ui.ExaminationActivity;
 import com.cwenhui.mark.widget.FullyLinearLayoutManager;
 
@@ -29,6 +30,7 @@ import de.greenrobot.event.EventBus;
 import de.greenrobot.event.Subscribe;
 
 /**
+ * 填空题页面
  * Created by cwenhui on 2016.02.23
  */
 public class FillBlankProblemFragment extends Fragment {
@@ -107,7 +109,7 @@ public class FillBlankProblemFragment extends Fragment {
                 .replace(Constant.OPTIONS_SPECIAL_CHARS, "").equals("");
 
         MyEvent answerState = new MyEvent();
-        answerState.eventType = AnswerSheetFragmt.FROM_FILLBLANK;       //事件类型
+        answerState.eventType = AnswerSheetFragment.FROM_FILLBLANK;       //事件类型
         answerState.eventData = completionState;                        //答题情况，包含题目索引和是否答题
         EventBus.getDefault().post(answerState);
     }
@@ -115,7 +117,7 @@ public class FillBlankProblemFragment extends Fragment {
     @Subscribe
     public void onEventMainThread(MyEvent myEvent) {
         //当从此页面切换到其他页面时，ExaminationActivity发送事件(包含当前题目索引)，通知此页面发送答题情况给答题卡页面
-        // 即ExaminationActivity-->FillBlankProblemFragment-->AnswerSheetFragmt
+        // 即ExaminationActivity-->FillBlankProblemFragment-->AnswerSheetFragment
         if (myEvent.eventType == FillBlankProblemFragment.TAG) {
             if ((int) myEvent.eventData != getArguments().getInt(INDEX)) {      //当前题目索引不是本页面索引
                 sendCompletionState();
@@ -124,17 +126,19 @@ public class FillBlankProblemFragment extends Fragment {
         //当点击提交试卷时，ExaminationActivity发送过来的事件
         if (myEvent.eventType == ExaminationActivity.TAG) {
             //处理结果，并发送给答题卡页面
-            MyEvent answer = new MyEvent();
-            answer.eventType = getArguments().getInt(INDEX) + "";
-//            answer.eventData = getAnswer();
-            answer.eventData = false;
-            if (practice.getPraticeAnswer().equals(getAnswer())) {
-                answer.eventData = true;
-            }
-            MyEvent event = new MyEvent();
-            event.eventType = AnswerSheetFragmt.TAG;
-            event.eventData = answer;
-            EventBus.getDefault().post(event);
+//            MyEvent answer = new MyEvent();
+//            answer.eventType = getArguments().getInt(INDEX) + "";
+////            answer.eventData = getAnswer();
+//            answer.eventData = false;
+//            if (practice.getPraticeAnswer().equals(getAnswer())) {
+//                answer.eventData = true;
+//            }
+//            MyEvent event = new MyEvent();
+//            event.eventType = AnswerSheetFragment.TAG;
+//            event.eventData = answer;
+//            EventBus.getDefault().post(event);
+            ProblemPresenter presenter = new ProblemPresenter();
+            presenter.submitAnswerForExamination(getArguments().getInt(INDEX));
         }
     }
 
@@ -155,7 +159,11 @@ public class FillBlankProblemFragment extends Fragment {
 
 
 }
+
+/**
+ * 填空题答题情况
+ */
 class FillBlankCompletionState {
-    int index;
-    boolean isCompleted;
+    int index;                      //当前页面索引
+    boolean isCompleted;            //是否已答题
 }

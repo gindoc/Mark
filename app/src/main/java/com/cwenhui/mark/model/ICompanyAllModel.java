@@ -1,7 +1,7 @@
 package com.cwenhui.mark.model;
 
 import com.cwenhui.mark.bean.CompanyAll;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 
 /**
  * Created by cwenhui on 2016.02.23
@@ -10,7 +10,7 @@ public interface ICompanyAllModel {
     public static final int PULL_DOWN = 1;
     public static final int PULL_UP = 2;
 
-//    interface OnGetListener{
+//    interface OnResponseListener{
 //        void onSuccess(List<CompanyAll> companyAlls);
 //        void onFailure();
 //    }
@@ -20,8 +20,8 @@ public interface ICompanyAllModel {
      * @param api
      * @return
      */
-//    public void getAllCompanySubjects(String api, OnGetListener getListener);
-    public void getAllCompanySubjects(String api, OnGetListener<CompanyAll> getListener);
+//    public void getAllCompanySubjects(String api, OnResponseListener getListener);
+    public void getAllCompanySubjects(String api, OnResponseListener<CompanyAll> getListener);
 
     /**
      * 根据是上拉或下拉刷新数据
@@ -29,7 +29,7 @@ public interface ICompanyAllModel {
      * @param direction
      * @return
      */
-//    public List<CompanyAll> refleshAllSpecialSubjects(String api, int direction, OnGetListener getListener);
+//    public List<CompanyAll> refleshAllSpecialSubjects(String api, int direction, OnResponseListener getListener);
     public void refleshAllCompanySubjects(String api, int direction,
-                                                      OnGetListener<CompanyAll> getListener);
+                                                      OnResponseListener<CompanyAll> getListener);
 }

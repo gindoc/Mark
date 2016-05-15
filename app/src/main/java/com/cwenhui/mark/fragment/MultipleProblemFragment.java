@@ -19,6 +19,7 @@ import com.cwenhui.mark.common.MyEvent;
 import com.cwenhui.mark.common.TextUtils;
 import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.entity.Practice;
+import com.cwenhui.mark.presenter.ProblemPresenter;
 import com.cwenhui.mark.ui.ExaminationActivity;
 import com.cwenhui.mark.widget.FullyLinearLayoutManager;
 
@@ -30,6 +31,7 @@ import de.greenrobot.event.EventBus;
 import de.greenrobot.event.Subscribe;
 
 /**
+ * 多选题页面
  * Created by cwenhui on 2016.02.23
  */
 public class MultipleProblemFragment extends Fragment implements CommonRecyclerViewAdapter.onItemClickListener {
@@ -115,7 +117,7 @@ public class MultipleProblemFragment extends Fragment implements CommonRecyclerV
      */
     private void sendCompletionState() {
         MyEvent answerState = new MyEvent();
-        answerState.eventType = AnswerSheetFragmt.TAG;
+        answerState.eventType = AnswerSheetFragment.TAG;
         answerState.eventData = getArguments().getInt(INDEX);
         EventBus.getDefault().post(answerState);
     }
@@ -134,17 +136,19 @@ public class MultipleProblemFragment extends Fragment implements CommonRecyclerV
         //当点击提交试卷时，ExaminationActivity发送过来的事件
         if (myEvent.eventType == ExaminationActivity.TAG) {
             //处理结果，并发送给答题卡页面
-            MyEvent answer = new MyEvent();
-            answer.eventType = getArguments().getInt(INDEX) + "";
-//            answer.eventData = getAnswer();
-            answer.eventData = false;
-            if (practice.getPraticeAnswer().equals(getAnswer())) {
-                answer.eventData = true;
-            }
-            MyEvent event = new MyEvent();
-            event.eventType = AnswerSheetFragmt.TAG;
-            event.eventData = answer;
-            EventBus.getDefault().post(event);
+//            MyEvent answer = new MyEvent();
+//            answer.eventType = getArguments().getInt(INDEX) + "";
+////            answer.eventData = getAnswer();
+//            answer.eventData = false;
+//            if (practice.getPraticeAnswer().equals(getAnswer())) {
+//                answer.eventData = true;
+//            }
+//            MyEvent event = new MyEvent();
+//            event.eventType = AnswerSheetFragment.TAG;
+//            event.eventData = answer;
+//            EventBus.getDefault().post(event);
+            ProblemPresenter presenter = new ProblemPresenter();
+            presenter.submitAnswerForExamination(getArguments().getInt(INDEX));
         }
     }
 

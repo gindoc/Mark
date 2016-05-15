@@ -2,7 +2,7 @@ package com.cwenhui.mark.model.impl;
 
 import com.cwenhui.mark.bean.Discuss;
 import com.cwenhui.mark.bean.DiscussCategory;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.model.IDiscussModel;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class DiscussModel implements IDiscussModel {
     @Override
-    public void initDisgussList(String api, final OnGetListener<Discuss> getListener) {
+    public void initDisgussList(String api, final OnResponseListener<Discuss> getListener) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -45,7 +45,7 @@ public class DiscussModel implements IDiscussModel {
     }
 
     @Override
-    public void reflesh(String api, int direction, final OnGetListener<Discuss> getListener) {
+    public void reflesh(String api, int direction, final OnResponseListener<Discuss> getListener) {
         new Thread(new Runnable() {
             @Override
             public void run() {

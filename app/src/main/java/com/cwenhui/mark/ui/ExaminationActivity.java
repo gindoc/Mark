@@ -1,6 +1,8 @@
 package com.cwenhui.mark.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
@@ -11,13 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.common.CommonPagerAdapter;
 import com.cwenhui.mark.common.MyEvent;
 import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.entity.Practice;
-import com.cwenhui.mark.fragment.AnswerSheetFragmt;
+import com.cwenhui.mark.fragment.AnswerSheetFragment;
 import com.cwenhui.mark.fragment.FillBlankProblemFragment;
 import com.cwenhui.mark.fragment.MultipleProblemFragment;
 import com.cwenhui.mark.fragment.SingleProblemFragment;
@@ -25,7 +28,9 @@ import com.cwenhui.mark.presenter.ExaminationPresenter;
 import com.cwenhui.mark.view.IExaminationView;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import de.greenrobot.event.EventBus;
 import de.greenrobot.event.Subscribe;
@@ -37,10 +42,13 @@ public class ExaminationActivity extends AppCompatActivity implements IExaminati
         ViewPager.OnPageChangeListener, View.OnClickListener {
     public static final String TAG = "ExaminationActivity";
     public static final String FROM_ANSWERSHEET = "fromAnswerSheet";
+    public static final String SUBMIT_SUCCESS = "submitSuccess";
     private ExaminationPresenter presenter;
     private ViewPager mViewPager;
     private Button preQuestion, nextQuestion;
     private Chronometer timer;
+    private Set<Integer> hasSendAnswerFragmt = new HashSet<>();
+    private Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +138,8 @@ public class ExaminationActivity extends AppCompatActivity implements IExaminati
 
     @Override
     public void setupViewPager(List<Practice> practices) {
+        //此处还应创建一个时间作为试卷的标识符，传给各个页面，用于提交答案给服务器时做标识，表明是同一套试卷
+        //。。。。
         List<Fragment> fragments = new ArrayList<>();
         for (int i = 0; i < practices.size(); i++) {
             switch (practices.get(i).getPraticeType()) {
@@ -145,7 +155,7 @@ public class ExaminationActivity extends AppCompatActivity implements IExaminati
 
             }
         }
-        fragments.add(new AnswerSheetFragmt());
+        fragments.add(new AnswerSheetFragment());
         CommonPagerAdapter adapter = new CommonPagerAdapter(getSupportFragmentManager(), null, fragments);
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(11);
@@ -158,9 +168,27 @@ public class ExaminationActivity extends AppCompatActivity implements IExaminati
     }
 
     @Subscribe
-    public void onEventMainThread(MyEvent myEvent) {
+    public void onEventMainThread(final MyEvent myEvent) {
         if (myEvent.eventType == FROM_ANSWERSHEET) {
             mViewPager.setCurrentItem((Integer) myEvent.eventData);
         }
+        if (myEvent.eventType == SUBMIT_SUCCESS) {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    hasSendAnswerFragmt.add((Integer) myEvent.eventData);
+                    if (hasSendAnswerFragmt.size() == 10) {
+                        //跳转到结果报告...同时把试卷的标识也传过去
+                        Toast.makeText(ExaminationActivity.this, "跳转到结果报告", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ExaminationActivity.this, ResultReportActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
+                        finish();
+                    }
+                }
+            });
+
+        }
     }
+
 }

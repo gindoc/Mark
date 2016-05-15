@@ -9,50 +9,41 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cwenhui.mark.R;
 import com.cwenhui.mark.common.CommonRecyclerViewAdapter;
 import com.cwenhui.mark.common.CommondRecyclerViewHolder;
 import com.cwenhui.mark.common.MyEvent;
-import com.cwenhui.mark.common.TextUtils;
+import com.cwenhui.mark.ui.ExaminationActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 import de.greenrobot.event.Subscribe;
 
 /**
- * 答题页面
- * Created by Administrator on 2016/5/11.
+ * 答题卡页面
+ * Created by cwenhui on 2016.02.23
  */
-public class AnswerSheetFragment extends Fragment {
-    public static final String EVENT_TYPE = "AnswerSheetFragment";
-    private View mView;
+public class AnswerSheetFragment extends Fragment implements CommonRecyclerViewAdapter.onItemClickListener {
+    public static final String TAG = "AnswerSheetFragment";
+    public static final String FROM_FILLBLANK = "fromFillblank";
+    private View view;
     private RecyclerView recyclerView;
     private CommonRecyclerViewAdapter<String> adapter;
-    private Map<Integer, String> answers = new HashMap<>();
 
-//    public static final AnswerSheetFragment newInstance(List<PaperDetail> paperDetails) {
-//        AnswerSheetFragment fragment = new AnswerSheetFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelableArrayList(EVENT_TYPE, (ArrayList<? extends Parcelable>) paperDetails);
-//        return fragment;
-//    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mView = inflater.inflate(R.layout.fragment_answer_sheet, container, false);
+        view = inflater.inflate(R.layout.fragment_answer_sheet, container, false);
         initData();
         initView();
-        return mView;
-
+        return view;
     }
 
     private void initData() {
+        EventBus.getDefault().register(this);
+
         List<String> answers = new ArrayList<>();
         for (int i = 1; i <= 10; i++) {
             answers.add(i + "");
@@ -65,47 +56,26 @@ public class AnswerSheetFragment extends Fragment {
                 setUpItemEvent(holder);
             }
         };
-        adapter.setClickListener(new OnAnswerClickListener());
+        adapter.setClickListener(this);
     }
 
     private void initView() {
-        EventBus.getDefault().register(this);
-        recyclerView = (RecyclerView) mView.findViewById(R.id.rv_fragment_answer_sheet);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rv_fragment_answer_sheet);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 5));
         recyclerView.setHasFixedSize(true);
     }
 
-    /**
-     * 接收各个页面的答题情况
-     * @param myEvent 事件（包含各个页面的答题情况）
-     */
-    @Subscribe
-    public void onEventMainThread(MyEvent myEvent) {
-        if (myEvent.eventType == AnswerSheetFragment.EVENT_TYPE) {
-            CompletionState completionState = (CompletionState) myEvent.eventData;
-            setAnswersState(completionState);
-        }
+    @Override
+    public void onItemClick(View view, int pos) {
+        MyEvent event = new MyEvent();
+        event.eventType = ExaminationActivity.FROM_ANSWERSHEET;
+        event.eventData = pos;
+        EventBus.getDefault().post(event);
     }
 
-    /**
-     * 设置答题卡每个选项的状态
-     * @param completionState 每个选项的状态，包含每个页面的索引和答案
-     */
-    public void setAnswersState(CompletionState completionState) {
-        View view = recyclerView.getChildAt(completionState.index);
-        TextView answer = (TextView) view.findViewById(R.id.tv_item_fragment_answer_sheet);
-        Drawable drawable;
-        if (!TextUtils.isEmpty(completionState.answer)) {           //如果填写了答案，填充背景色
-            drawable = ContextCompat.getDrawable(getActivity(),
-                    R.drawable.choice_question_option_selected);
-        } else {                                                    //如果为填写答案，不填充背景色
-            drawable = ContextCompat.getDrawable(getActivity(),
-                    R.drawable.choice_question_option_normal);
-        }
-        answer.setBackground(drawable);
-        answers.put(completionState.index, completionState.answer); //记录答题情况
-    }
+    @Override
+    public void onItemLongClick(View view, int pos) {}
 
     @Override
     public void onDestroyView() {
@@ -113,15 +83,45 @@ public class AnswerSheetFragment extends Fragment {
         EventBus.getDefault().unregister(this);//反注册EventBus
     }
 
-    class OnAnswerClickListener implements CommonRecyclerViewAdapter.onItemClickListener {
+    @Subscribe
+    public void onEventMainThread(MyEvent myEvent) {
+//        if (myEvent.eventType == AnswerSheetFragment.TAG) {
+//            //处理各个页面提交的结果
+//            MyEvent answer = (MyEvent) myEvent.eventData;
+//            View view = recyclerView.getChildAt(Integer.parseInt(answer.eventType));
+//            View No = view.findViewById(R.id.tv_item_fragment_answer_sheet);
+//            Drawable drawable;
+//            if ((boolean) answer.eventData) {
+//                drawable = ContextCompat.getDrawable(getActivity(), R.drawable.choice_question_option_selected);
+////            No.setBackground();
+//            } else {
+//                drawable = ContextCompat.getDrawable(getActivity(), R.drawable.choice_question_option_wrong);
+//            }
+//            No.setBackground(drawable);
+//        }
 
-        @Override
-        public void onItemClick(View view, int pos) {
-            Toast.makeText(getActivity(), pos + "", Toast.LENGTH_SHORT).show();
+        //选择题页面发过来的事件
+        if (myEvent.eventType == AnswerSheetFragment.TAG) {
+            View view = recyclerView.getChildAt((Integer) myEvent.eventData);       //找到对应的题号
+            View No = view.findViewById(R.id.tv_item_fragment_answer_sheet);
+            Drawable drawable = ContextCompat.getDrawable(getActivity(),            //如果填写了答案，填充颜色
+                    R.drawable.choice_question_option_selected);
+            No.setBackground(drawable);
         }
-
-        @Override
-        public void onItemLongClick(View view, int pos) {
+        //填空题页面发过来的事件
+        if (myEvent.eventType == AnswerSheetFragment.FROM_FILLBLANK) {
+            FillBlankCompletionState completionState = (FillBlankCompletionState) myEvent.eventData;
+            View view = recyclerView.getChildAt(completionState.index);         //找到对应的题号
+            View No = view.findViewById(R.id.tv_item_fragment_answer_sheet);
+            if (completionState.isCompleted) {                                  //如果填写了答案，填充颜色
+                Drawable drawable = ContextCompat.getDrawable(getActivity(),
+                        R.drawable.choice_question_option_selected);
+                No.setBackground(drawable);
+            }else{                                                              //未填写答案，默认背景
+                Drawable drawable = ContextCompat.getDrawable(getActivity(),
+                        R.drawable.choice_question_option_normal);
+                No.setBackground(drawable);
+            }
         }
     }
 }

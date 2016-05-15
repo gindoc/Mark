@@ -3,7 +3,7 @@ package com.cwenhui.mark.presenter;
 import android.os.Handler;
 
 import com.cwenhui.mark.bean.Discuss;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.common.RVScrollListener;
 import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.model.IDiscussModel;
@@ -34,7 +34,7 @@ public class DiscussPresenter implements IPresenter {
      * 初始化讨论区列表
      */
     public void initDiscussList(int plate) {
-        discussModel.initDisgussList(null, new OnGetListener<Discuss>(){
+        discussModel.initDisgussList(null, new OnResponseListener<Discuss>(){
             @Override
             public void onSuccess(final Collection<Discuss> discusses) {
                 mHandler.post(new Runnable() {
@@ -58,7 +58,7 @@ public class DiscussPresenter implements IPresenter {
      */
     @Override
     public void reflesh(final int direction) {
-        discussModel.reflesh(null, direction, new OnGetListener<Discuss>() {
+        discussModel.reflesh(null, direction, new OnResponseListener<Discuss>() {
             @Override
             public void onSuccess(final Collection<Discuss> discusses) {
                 mHandler.post(new Runnable() {
@@ -87,7 +87,7 @@ public class DiscussPresenter implements IPresenter {
      * @param type  类型编码
      */
     public void switchDiscussType(int plate, String type) {
-        discussModel.initDisgussList(null, new OnGetListener<Discuss>() {
+        discussModel.initDisgussList(null, new OnResponseListener<Discuss>() {
             @Override
             public void onSuccess(final Collection<Discuss> discusses) {
                 mHandler.post(new Runnable() {

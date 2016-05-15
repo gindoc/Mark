@@ -1,7 +1,7 @@
 package com.cwenhui.mark.model.impl;
 
 import com.cwenhui.mark.bean.Discuss;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.model.IPublishTopicModel;
 
 /**
@@ -10,7 +10,7 @@ import com.cwenhui.mark.model.IPublishTopicModel;
 public class PublishTopicModel implements IPublishTopicModel {
 
     @Override
-    public void publishTopic(Discuss discuss, final OnGetListener<String> getListener) {
+    public void publishTopic(Discuss discuss, final OnResponseListener<String> getListener) {
         //进行网络请求...
         new Thread(new Runnable() {
             @Override

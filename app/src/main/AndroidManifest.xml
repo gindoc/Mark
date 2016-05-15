@@ -40,10 +40,13 @@
             android:name=".ui.PlatesActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.KnowledgePointActivity"
+            android:name=".ui.ExaminationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.ExaminationActivity"
+            android:name=".ui.ResultReportActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.ParseActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

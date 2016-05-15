@@ -3,7 +3,7 @@ package com.cwenhui.mark.presenter;
 import android.os.Handler;
 
 import com.cwenhui.mark.bean.Practice;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.model.ICompanyAllModel;
 import com.cwenhui.mark.model.ISpecialPracticeModel;
 import com.cwenhui.mark.model.impl.SpecialPracticeModel;
@@ -30,7 +30,7 @@ public class SpecialPraticePresenter {
      * 初始化专项练习列表
      */
     public void initSpecialPracticeList() {
-        practiceModel.getPratices(null, new OnGetListener<Practice>() {
+        practiceModel.getPratices(null, new OnResponseListener<Practice>() {
             @Override
             public void onSuccess(final Map<String, List<Practice>> ResultSet) {
                 mHandler.post(new Runnable() {
@@ -50,7 +50,7 @@ public class SpecialPraticePresenter {
      * @param direction
      */
     public void reflesh(final int direction) {
-        practiceModel.refleshAllSpecialSubjects(null, direction, new OnGetListener<Practice>() {
+        practiceModel.refleshAllSpecialSubjects(null, direction, new OnResponseListener<Practice>() {
             @Override
             public void onSuccess(final Map<String, List<Practice>> ResultSet) {
                 mHandler.post(new Runnable() {

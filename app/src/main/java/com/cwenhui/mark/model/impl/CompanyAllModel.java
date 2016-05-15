@@ -2,7 +2,7 @@ package com.cwenhui.mark.model.impl;
 
 import com.cwenhui.mark.bean.CompanyAll;
 import com.cwenhui.mark.model.ICompanyAllModel;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ public class CompanyAllModel implements ICompanyAllModel {
     private static final String TAG = "CompanyAllModel";
 
     @Override
-    public void getAllCompanySubjects(String api, final OnGetListener<CompanyAll> getListener) {
+    public void getAllCompanySubjects(String api, final OnResponseListener<CompanyAll> getListener) {
         new Thread(new Runnable() {     //模拟网络耗时请求
             @Override
             public void run() {
@@ -37,7 +37,7 @@ public class CompanyAllModel implements ICompanyAllModel {
 
     @Override
     public void refleshAllCompanySubjects(String api, final int direction,
-                                                            final OnGetListener getListener) {
+                                                            final OnResponseListener getListener) {
         new Thread(new Runnable() {
             @Override
             public void run() {

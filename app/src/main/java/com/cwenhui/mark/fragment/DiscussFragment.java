@@ -1,7 +1,6 @@
 package com.cwenhui.mark.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -42,7 +41,7 @@ public class DiscussFragment extends Fragment implements IDiscussView,
     private ImageLoader imageLoader = ImageLoader.getInstance();
     private DisplayImageOptions options;                                //显示图片的各种设置
     private ImageFirstDisplayListener displayListener = new ImageFirstDisplayListener();
-    private Handler mHandler = new Handler();
+//    private Handler mHandler = new Handler();
     public static final int ALL = 10, TECH = 11, INTERVIEW_EXCE = 12, CHAT = 13, NOTICE = 14, REC_SHARE = 15,
             QUES = 16, RECRUIT = 17, WORK_FEELING = 18;
     private int plate;

@@ -1,6 +1,6 @@
 package com.cwenhui.mark.model;
 
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.entity.Practice;
 
 /**
@@ -12,5 +12,5 @@ public interface IExaminationModel {
      * @param api               getPractices(分页)
      * @param getListener       callBack
      */
-    void getPaperDetail(String api, OnGetListener<Practice> getListener);
+    void getPaperDetail(String api, OnResponseListener<Practice> getListener);
 }

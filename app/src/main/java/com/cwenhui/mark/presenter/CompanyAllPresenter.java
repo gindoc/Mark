@@ -3,7 +3,7 @@ package com.cwenhui.mark.presenter;
 import android.os.Handler;
 
 import com.cwenhui.mark.bean.CompanyAll;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.common.RVScrollListener;
 import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.model.ICompanyAllModel;
@@ -31,7 +31,7 @@ public class CompanyAllPresenter implements IPresenter{
      * 初始化全部公司套题列表
      */
     public void initCompanyAllsList() {
-        companyAllModel.getAllCompanySubjects(null, new OnGetListener<CompanyAll>() {
+        companyAllModel.getAllCompanySubjects(null, new OnResponseListener<CompanyAll>() {
             @Override
             public void onSuccess(final Collection<CompanyAll> companyAlls) {
                 //此时处于子线程,需要在UI线程执行,这点很重要
@@ -51,7 +51,7 @@ public class CompanyAllPresenter implements IPresenter{
      * @param direction 方向（ICompanyAllModel.PULL_DOWN、ICompanyAllModel.PULL_UP）
      */
     public void reflesh(final int direction) {
-        companyAllModel.refleshAllCompanySubjects(null, direction, new OnGetListener<CompanyAll>() {
+        companyAllModel.refleshAllCompanySubjects(null, direction, new OnResponseListener<CompanyAll>() {
             @Override
             public void onSuccess(final Collection<CompanyAll> companyAlls) {
                 //此时处于子线程,需要在UI线程执行,这点很重要

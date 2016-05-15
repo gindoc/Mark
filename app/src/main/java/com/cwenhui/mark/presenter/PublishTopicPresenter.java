@@ -3,7 +3,7 @@ package com.cwenhui.mark.presenter;
 import android.os.Handler;
 
 import com.cwenhui.mark.bean.Discuss;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.common.TextUtils;
 import com.cwenhui.mark.model.IPublishTopicModel;
 import com.cwenhui.mark.model.impl.PublishTopicModel;
@@ -43,7 +43,7 @@ public class PublishTopicPresenter {
         }
         Discuss discuss = new Discuss();
         discuss.setTags(tags);
-        model.publishTopic(discuss, new OnGetListener<String>() {
+        model.publishTopic(discuss, new OnResponseListener<String>() {
             @Override
             public void onSuccess(String s) {
                 mHandler.post(new Runnable() {

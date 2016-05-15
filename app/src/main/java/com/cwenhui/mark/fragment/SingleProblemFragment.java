@@ -18,6 +18,7 @@ import com.cwenhui.mark.common.CommondRecyclerViewHolder;
 import com.cwenhui.mark.common.MyEvent;
 import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.entity.Practice;
+import com.cwenhui.mark.presenter.ProblemPresenter;
 import com.cwenhui.mark.ui.ExaminationActivity;
 import com.cwenhui.mark.widget.FullyLinearLayoutManager;
 
@@ -111,7 +112,7 @@ public class SingleProblemFragment extends Fragment implements CommonRecyclerVie
      */
     private void sendCompletionState() {
         MyEvent answerState = new MyEvent();
-        answerState.eventType = AnswerSheetFragmt.TAG;
+        answerState.eventType = AnswerSheetFragment.TAG;
         answerState.eventData = getArguments().getInt(INDEX);
         EventBus.getDefault().post(answerState);
     }
@@ -128,21 +129,23 @@ public class SingleProblemFragment extends Fragment implements CommonRecyclerVie
     @Subscribe
     public void onEventMainThread(MyEvent myEvent) {
         //当点击提交试卷时，ExaminationActivity发送过来的事件
-        if (myEvent.eventType == ExaminationActivity.TAG) {                     
-            //发送答题情况给答题卡页面，包含题目索引
-            MyEvent answer = new MyEvent();
-            answer.eventType = getArguments().getInt(INDEX) + "";
-//            answer.eventData = (char)(lastPostion+65)+"";
-            answer.eventData = false;
-            if (practice.getPraticeAnswer().equals((char) (lastPostion + 65) + "")) {
-                answer.eventData = true;
-            }
-            MyEvent event = new MyEvent();
-            event.eventType = AnswerSheetFragmt.TAG;
-            event.eventData = answer;
-            EventBus.getDefault().post(event);
+        if (myEvent.eventType == ExaminationActivity.TAG) {
+//            //发送答题情况给答题卡页面，包含题目索引
+//            MyEvent answer = new MyEvent();
+//            answer.eventType = getArguments().getInt(INDEX) + "";
+////            answer.eventData = (char)(lastPostion+65)+"";
+//            answer.eventData = false;
+//            if (practice.getPraticeAnswer().equals((char) (lastPostion + 65) + "")) {
+//                answer.eventData = true;
+//            }
+//            MyEvent event = new MyEvent();
+//            event.eventType = AnswerSheetFragment.TAG;
+//            event.eventData = answer;
+//            EventBus.getDefault().post(event);
 
             //此处还有进行网络请求，向服务器数据库的已做题库插入此道题
+            ProblemPresenter presenter = new ProblemPresenter();
+            presenter.submitAnswerForExamination(getArguments().getInt(INDEX));
         }
     }
 }

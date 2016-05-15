@@ -1,7 +1,7 @@
 package com.cwenhui.mark.model.impl;
 
 import com.cwenhui.mark.bean.CourseVideo;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.model.ICourseModel;
 
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class CourseModel implements ICourseModel {
     @Override
-    public void getCourses(String api, final OnGetListener<CourseVideo> getListener) {
+    public void getCourses(String api, final OnResponseListener<CourseVideo> getListener) {
         new Thread(new Runnable() {
             @Override
             public void run() {

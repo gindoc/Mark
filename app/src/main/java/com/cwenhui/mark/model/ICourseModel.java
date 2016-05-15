@@ -1,7 +1,7 @@
 package com.cwenhui.mark.model;
 
 import com.cwenhui.mark.bean.CourseVideo;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 
 /**
  * Created by cwenhui on 2016.02.23
@@ -12,6 +12,6 @@ public interface ICourseModel {
      * @param api
      * @return
      */
-    public void getCourses(String api, OnGetListener<CourseVideo> getListener);
+    public void getCourses(String api, OnResponseListener<CourseVideo> getListener);
 
 }

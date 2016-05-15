@@ -9,7 +9,7 @@ import java.util.Map;
  * 用于回调处理UI
  * Created by cwenhui on 2016.02.23
  */
-public interface IOnGetListener<T> {
+public interface IOnResponseListener<T> {
     /**
      * 请求成功时返回一个指定类型的集合
      * @param t
@@ -31,4 +31,7 @@ public interface IOnGetListener<T> {
      * 请求失败时的回调
      */
     void onFailure();
+
+
+//    void onPostListener(int statusCode, String data);
 }

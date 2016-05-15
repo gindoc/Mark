@@ -2,7 +2,7 @@ package com.cwenhui.mark.presenter;
 
 import android.os.Handler;
 
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 import com.cwenhui.mark.entity.Practice;
 import com.cwenhui.mark.model.IExaminationModel;
 import com.cwenhui.mark.model.impl.ExaminationModel;
@@ -30,7 +30,7 @@ public class ExaminationPresenter {
      */
     public void dispatchPapersToFragment() {
         //显示提示框（组卷中）。。。
-        model.getPaperDetail(null, new OnGetListener<Practice>() {
+        model.getPaperDetail(null, new OnResponseListener<Practice>() {
             @Override
             public void onSuccess(final Collection<Practice> practices) {
                 handler.post(new Runnable() {

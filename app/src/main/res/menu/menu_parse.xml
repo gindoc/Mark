@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/parse_collect"
+        android:icon="@drawable/icon_h_collect"
+        android:orderInCategory="100"
+        android:title="收藏"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/parse_share"
+        android:icon="@drawable/icon_share"
+        android:orderInCategory="101"
+        android:title="分享"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/parse_notify"
+        android:icon="@drawable/icon_bell"
+        android:orderInCategory="102"
+        android:title="消息"
+        app:showAsAction="ifRoom" />
+
+</menu>

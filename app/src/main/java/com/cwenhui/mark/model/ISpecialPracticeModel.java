@@ -1,7 +1,7 @@
 package com.cwenhui.mark.model;
 
 import com.cwenhui.mark.bean.Practice;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 
 /**
  * Created by cwenhui on 2016.02.23
@@ -15,8 +15,8 @@ public interface ISpecialPracticeModel {
      * @param api
      * @param getListener
      */
-    public void getPratices(String api, OnGetListener<Practice> getListener);
+    public void getPratices(String api, OnResponseListener<Practice> getListener);
 
     public void refleshAllSpecialSubjects(String api, int direction,
-                                          OnGetListener<Practice> getListener);
+                                          OnResponseListener<Practice> getListener);
 }

@@ -1,7 +1,7 @@
 package com.cwenhui.mark.model;
 
 import com.cwenhui.mark.bean.Discuss;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 
 /**
  * Created by cwenhui on 2016.02.23
@@ -12,9 +12,9 @@ public interface IDiscussModel {
      * @param api
      * @param getListener
      */
-    public void initDisgussList(String api, OnGetListener<Discuss> getListener);
+    public void initDisgussList(String api, OnResponseListener<Discuss> getListener);
 
-    public void reflesh(String api, int direction, OnGetListener<Discuss> getListener);
+    public void reflesh(String api, int direction, OnResponseListener<Discuss> getListener);
 
 
 //    /**

@@ -2,7 +2,7 @@ package com.cwenhui.mark.model.impl;
 
 import com.cwenhui.mark.bean.Practice;
 import com.cwenhui.mark.model.ISpecialPracticeModel;
-import com.cwenhui.mark.common.OnGetListener;
+import com.cwenhui.mark.common.OnResponseListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ public class SpecialPracticeModel implements ISpecialPracticeModel {
     private String[] childName = new String[]{"数组","字符串","链表","栈","队列",
             "树","java","C","VB","PHP","软件工程","ACM","数字与逻辑","剑指Office","编程之美"};
     @Override
-    public void getPratices(String api, final OnGetListener<Practice> getListener) {
+    public void getPratices(String api, final OnResponseListener<Practice> getListener) {
         new Thread(new Runnable() {     //模拟网络耗时操作
             @Override
             public void run() {
@@ -42,7 +42,7 @@ public class SpecialPracticeModel implements ISpecialPracticeModel {
     }
 
     @Override
-    public void refleshAllSpecialSubjects(String api, final int direction, final OnGetListener<Practice> getListener) {
+    public void refleshAllSpecialSubjects(String api, final int direction, final OnResponseListener<Practice> getListener) {
         new Thread(new Runnable() {         //模拟网络耗时操作
             @Override
             public void run() {
