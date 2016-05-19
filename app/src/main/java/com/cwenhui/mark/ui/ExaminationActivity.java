@@ -102,6 +102,7 @@ public class ExaminationActivity extends AppCompatActivity implements IExaminati
                 break;
             case R.id.btn_activity_examination_pre:
                 if (pos == 10) {
+                    v.setClickable(false);
                     timer.stop();
                     MyEvent myEvent = new MyEvent();
                     myEvent.eventType = ExaminationActivity.TAG;

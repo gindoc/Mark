@@ -15,6 +15,7 @@ import com.cwenhui.mark.configs.Constant;
 import com.cwenhui.mark.entity.CompletedPractice;
 import com.cwenhui.mark.entity.Practice;
 import com.cwenhui.mark.fragment.ParseChoiceFragment;
+import com.cwenhui.mark.fragment.ParseFillBlankFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,11 +59,13 @@ public class ParseActivity extends AppCompatActivity {
             switch (practice.getPraticeType()) {
                 case Constant.SINGLE_PROBLEM:
                 case Constant.MULTIPUL_PROBLEM:
-                    fragments.add(ParseChoiceFragment.newInstance(completedPractices.get(i)));
+                    fragments.add(ParseChoiceFragment.newInstance(i + 1, completedPractices.size(),
+                            completedPractices.get(i)));
                     break;
 
                 case Constant.FILL_BLANK_PROBLEM:
-
+                    fragments.add(ParseFillBlankFragment.newInstance(i + 1, completedPractices.size(),
+                            completedPractices.get(i)));
                     break;
             }
 

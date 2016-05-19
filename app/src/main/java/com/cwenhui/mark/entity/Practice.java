@@ -12,6 +12,7 @@ public class Practice implements Serializable{
     private String praticeAnswer;
     private int praticeType;
     private PracticeCategory category;
+    private User user;
 
     public String getPraticeId() {
         return praticeId;
@@ -59,5 +60,13 @@ public class Practice implements Serializable{
 
     public void setCategory(PracticeCategory category) {
         this.category = category;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

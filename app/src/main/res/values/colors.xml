@@ -20,4 +20,5 @@
     <color name="swipeColor2">#eacf02</color>
     <color name="swipeColor3">#1215dc</color>
     <color name="swipeColor4">#12dc4f</color>
+    <color name="commentName">#FD8321</color>
 </resources>

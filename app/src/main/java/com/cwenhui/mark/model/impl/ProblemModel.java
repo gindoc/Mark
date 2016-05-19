@@ -91,7 +91,7 @@ public class ProblemModel implements IProblemModel {
                 cps.add(cp);
 
                 cp = new CompletedPractice();     //错题
-                cp.setUserAnswer("A");
+                cp.setUserAnswer("A"+ Constant.OPTIONS_SPECIAL_CHARS + "C");
                 cp.setElapsed("425");
                 cp.setIsRight(false);
                 cp.setPaperIdentifier("1");
@@ -106,10 +106,10 @@ public class ProblemModel implements IProblemModel {
                 practice.setCategory(category);
                 practice.setPraticeType(Constant.FILL_BLANK_PROBLEM);
 
-                cp = new CompletedPractice();       //对题
-                cp.setUserAnswer("A" + Constant.OPTIONS_SPECIAL_CHARS + "B");
+                cp = new CompletedPractice();       //错题
+                cp.setUserAnswer("A" + Constant.OPTIONS_SPECIAL_CHARS + "C");
                 cp.setElapsed("425");
-                cp.setIsRight(true);
+                cp.setIsRight(false);
                 cp.setPaperIdentifier("1");
                 cp.setPractice(practice);
                 cp.setCreateTime(new Date());

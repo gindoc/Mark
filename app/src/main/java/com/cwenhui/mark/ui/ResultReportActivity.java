@@ -113,7 +113,6 @@ public class ResultReportActivity extends AppCompatActivity implements IResultRe
         Intent intent = new Intent(ResultReportActivity.this, ParseActivity.class);
         switch (v.getId()) {
             case R.id.ll_activity_result_report_error:
-                Toast.makeText(ResultReportActivity.this, "click", Toast.LENGTH_SHORT).show();
                 List<CompletedPractice> errors = new ArrayList<>();
                 for (int i = 0; i < completedPractices.size(); i++) {
                     if (!completedPractices.get(i).isRight()) {
@@ -131,4 +130,5 @@ public class ResultReportActivity extends AppCompatActivity implements IResultRe
         startActivity(intent);
         overridePendingTransition(R.anim.zoomin, R.anim.zoomout);
     }
+
 }

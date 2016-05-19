@@ -17,11 +17,11 @@ public abstract class CommonRefreshRecyclerViewAdapter<T> extends RecyclerView.A
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
     private static final int TYPE_NOT_FULL = -1;
-    private Context context;
-    private int itemLayout;
+    protected Context context;
+    protected int itemLayout;
     private int footerLayout;
     protected List<T> mDatas;
-    private LayoutInflater mInflater;
+    protected LayoutInflater mInflater;
     private onItemClickListener clickListener;
 
     public CommonRefreshRecyclerViewAdapter(Context context, int itemLayout, int footerLayout, List<T> datas) {

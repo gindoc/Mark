@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="@dimen/x10"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <com.cwenhui.mark.widget.RoundImageView
+            android:id="@+id/iv_item_comment_img"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_marginRight="@dimen/x10"
+            tools:src="@drawable/nowcoder_ic_launcher"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_item_comment_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="小海豹"
+                android:textColor="@color/commentName"
+                android:textSize="16sp"/>
+            <TextView
+                android:id="@+id/tv_item_comment_publish_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grayFontColor"
+                tools:text="2015-01-07 20:57:37"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_item_comment_commented"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_noreply_number"
+            android:text="15"
+            android:textColor="@color/themeColor"
+            android:drawablePadding="@dimen/x5"
+            android:layout_marginRight="@dimen/x5"/>
+
+        <TextView
+            android:id="@+id/tv_item_comment_praise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_nozan_number"
+            android:textColor="@color/themeColor"
+            android:drawablePadding="@dimen/x5"
+            android:text="65"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_item_comment_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginLeft="@dimen/x40"
+        android:textSize="16sp"
+        tools:text="wo shi xiao ma xiao er lang,bei zhe shubao shangxuetang"/>
+</LinearLayout>
